@@ -222,10 +222,7 @@ export const useUIStore = create<UIStore>()(
 
         closeModal: (modal) => {
           set((state) => {
-            state.modals[modal] = {
-              ...state.modals[modal],
-              isOpen: false
-            };
+            state.modals[modal].isOpen = false;
           });
         },
 
@@ -335,7 +332,7 @@ export const selectFilteredCharacterIds = (characterList: Array<{
     filtered = filtered.filter(char => filters.race!.includes(char.race));
   }
   if (filters.background?.length) {
-    filtered = filtered.filter(char => filters.background!.includes(char.background));
+    filtered = filtered.filter(char => char.background && filters.background!.includes(char.background));
   }
   if (filters.level?.length) {
     filtered = filtered.filter(char => filters.level!.includes(char.level));
