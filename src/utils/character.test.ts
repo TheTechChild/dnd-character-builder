@@ -1,6 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
 import { createEmptyCharacter } from './character';
-import { SCHEMA_VERSION } from '@/types/schema';
 
 describe('Character Utils', () => {
   describe('createEmptyCharacter', () => {
@@ -9,15 +8,15 @@ describe('Character Utils', () => {
       
       // Check metadata
       expect(character.id).toBeTruthy();
-      expect(character.version).toBe(SCHEMA_VERSION);
-      expect(character.createdAt).toBeTruthy();
-      expect(character.updatedAt).toBeTruthy();
+      expect(character.id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
       
       // Check basic info
       expect(character.name).toBe('');
       expect(character.level).toBe(1);
       expect(character.race).toBe('');
       expect(character.class).toBe('');
+      expect(character.background).toBe('');
+      expect(character.alignment).toBe('');
       
       // Check ability scores
       expect(character.abilityScores).toEqual({
@@ -29,27 +28,22 @@ describe('Character Utils', () => {
         cha: 10,
       });
       
+      // Check proficiency bonus
+      expect(character.proficiencyBonus).toBe(2);
+      
       // Check arrays are initialized
-      expect(character.savingThrows).toEqual([]);
       expect(character.skills).toEqual([]);
       expect(character.languages).toEqual([]);
-      expect(character.attacks).toEqual([]);
-      expect(character.features).toEqual([]);
+      expect(character.traits).toEqual([]);
       expect(character.equipment).toEqual([]);
       
       // Check combat stats
       expect(character.armorClass).toBe(10);
       expect(character.speed).toBe(30);
-      expect(character.maxHitPoints).toBe(0);
-      expect(character.currentHitPoints).toBe(0);
-      
-      // Check currency
-      expect(character.currency).toEqual({
-        cp: 0,
-        sp: 0,
-        gp: 0,
-        ep: 0,
-        pp: 0,
+      expect(character.hitPoints).toEqual({
+        current: 0,
+        max: 0,
+        temporary: 0,
       });
     });
     
