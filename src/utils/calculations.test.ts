@@ -84,8 +84,11 @@ describe('D&D Calculations', () => {
     };
 
     it('should calculate spell save DC correctly', () => {
+      // INT 16 = +3 modifier, DC = 8 + 2 + 3 = 13
       expect(getSpellSaveDC('int', abilityScores, 2)).toBe(13);
-      expect(getSpellSaveDC('wis', abilityScores, 3)).toBe(14);
+      // WIS 14 = +2 modifier, DC = 8 + 3 + 2 = 13
+      expect(getSpellSaveDC('wis', abilityScores, 3)).toBe(13);
+      // CHA 18 = +4 modifier, DC = 8 + 4 + 4 = 16
       expect(getSpellSaveDC('cha', abilityScores, 4)).toBe(16);
     });
   });
@@ -101,8 +104,11 @@ describe('D&D Calculations', () => {
     };
 
     it('should calculate spell attack bonus correctly', () => {
+      // INT 16 = +3 modifier, attack = 2 + 3 = 5
       expect(getSpellAttackBonus('int', abilityScores, 2)).toBe(5);
-      expect(getSpellAttackBonus('wis', abilityScores, 3)).toBe(6);
+      // WIS 14 = +2 modifier, attack = 3 + 2 = 5
+      expect(getSpellAttackBonus('wis', abilityScores, 3)).toBe(5);
+      // CHA 18 = +4 modifier, attack = 4 + 4 = 8
       expect(getSpellAttackBonus('cha', abilityScores, 4)).toBe(8);
     });
   });

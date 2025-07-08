@@ -1,4 +1,7 @@
 import { Character } from '@/types/schema';
+import { z, ZodError } from 'zod';
+import { CharacterSchemaV2, CreateCharacterInputSchema, UpdateCharacterInputSchema } from '@/schemas/characterSchemaV2';
+import { Character as CharacterV2 } from '@/types/character';
 
 export interface ValidationError {
   field: string;
@@ -27,12 +30,12 @@ export function validateCharacterName(name: string): ValidationError | null {
 }
 
 export function validateAbilityScore(score: number, ability: string): ValidationError | null {
-  if (score < 3) {
-    return { field: ability, message: `${ability} score must be at least 3` };
+  if (score < 1) {
+    return { field: ability, message: `${ability} score must be at least 1` };
   }
   
-  if (score > 20) {
-    return { field: ability, message: `${ability} score must be no more than 20` };
+  if (score > 30) {
+    return { field: ability, message: `${ability} score must be no more than 30` };
   }
   
   return null;
@@ -67,4 +70,85 @@ export function validateCharacter(character: Character): ValidationError[] {
   }
   
   return errors;
+}
+
+// Zod-based validation functions
+export function validateCharacterV2(character: unknown): { success: true; data: CharacterV2 } | { success: false; errors: ValidationError[] } {
+  try {
+    const validated = CharacterSchemaV2.parse(character);
+    return { success: true, data: validated };
+  } catch (error) {
+    if (error instanceof ZodError) {
+      const errors: ValidationError[] = error.errors.map(err => ({
+        field: err.path.join('.'),
+        message: err.message,
+      }));
+      return { success: false, errors };
+    }
+    return { success: false, errors: [{ field: 'unknown', message: 'An unknown error occurred' }] };
+  }
+}
+
+export function validateCreateCharacterInput(input: unknown): { success: true; data: z.infer<typeof CreateCharacterInputSchema> } | { success: false; errors: ValidationError[] } {
+  try {
+    const validated = CreateCharacterInputSchema.parse(input);
+    return { success: true, data: validated };
+  } catch (error) {
+    if (error instanceof ZodError) {
+      const errors: ValidationError[] = error.errors.map(err => ({
+        field: err.path.join('.'),
+        message: err.message,
+      }));
+      return { success: false, errors };
+    }
+    return { success: false, errors: [{ field: 'unknown', message: 'An unknown error occurred' }] };
+  }
+}
+
+export function validateUpdateCharacterInput(input: unknown): { success: true; data: z.infer<typeof UpdateCharacterInputSchema> } | { success: false; errors: ValidationError[] } {
+  try {
+    const validated = UpdateCharacterInputSchema.parse(input);
+    return { success: true, data: validated };
+  } catch (error) {
+    if (error instanceof ZodError) {
+      const errors: ValidationError[] = error.errors.map(err => ({
+        field: err.path.join('.'),
+        message: err.message,
+      }));
+      return { success: false, errors };
+    }
+    return { success: false, errors: [{ field: 'unknown', message: 'An unknown error occurred' }] };
+  }
+}
+
+// Helper function to validate specific fields
+export function validateField(fieldPath: string, value: unknown, schema: z.ZodSchema): ValidationError | null {
+  try {
+    schema.parse(value);
+    return null;
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return {
+        field: fieldPath,
+        message: error.errors[0]?.message || 'Invalid value',
+      };
+    }
+    return {
+      field: fieldPath,
+      message: 'An unknown error occurred',
+    };
+  }
+}
+
+// Validate HP doesn't exceed maximum
+export function validateHitPoints(current: number, max: number, temp: number = 0): ValidationError | null {
+  if (current < 0) {
+    return { field: 'hitPoints.current', message: 'Current HP cannot be negative' };
+  }
+  
+  if (current > max + temp) {
+    return { field: 'hitPoints.current', message: 'Current HP cannot exceed max HP plus temporary HP' };
+  }
+  
+  return null;
 }
