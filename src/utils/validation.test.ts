@@ -52,29 +52,29 @@ describe('Validation Utils', () => {
   describe('validateAbilityScore', () => {
     it('should accept valid ability scores', () => {
       expect(validateAbilityScore(10, 'STR')).toBeNull();
-      expect(validateAbilityScore(3, 'DEX')).toBeNull();
-      expect(validateAbilityScore(20, 'CON')).toBeNull();
+      expect(validateAbilityScore(1, 'DEX')).toBeNull();
+      expect(validateAbilityScore(30, 'CON')).toBeNull();
     });
 
-    it('should reject scores below 3', () => {
-      expect(validateAbilityScore(2, 'STR')).toEqual({
+    it('should reject scores below 1', () => {
+      expect(validateAbilityScore(0, 'STR')).toEqual({
         field: 'STR',
-        message: 'STR score must be at least 3'
+        message: 'STR score must be at least 1'
       });
-      expect(validateAbilityScore(0, 'DEX')).toEqual({
+      expect(validateAbilityScore(-5, 'DEX')).toEqual({
         field: 'DEX',
-        message: 'DEX score must be at least 3'
+        message: 'DEX score must be at least 1'
       });
     });
 
-    it('should reject scores above 20', () => {
-      expect(validateAbilityScore(21, 'CON')).toEqual({
+    it('should reject scores above 30', () => {
+      expect(validateAbilityScore(31, 'CON')).toEqual({
         field: 'CON',
-        message: 'CON score must be no more than 20'
+        message: 'CON score must be no more than 30'
       });
-      expect(validateAbilityScore(30, 'INT')).toEqual({
+      expect(validateAbilityScore(40, 'INT')).toEqual({
         field: 'INT',
-        message: 'INT score must be no more than 20'
+        message: 'INT score must be no more than 30'
       });
     });
   });
@@ -113,8 +113,8 @@ describe('Validation Utils', () => {
       const character = createEmptyCharacter();
       character.name = '';
       character.level = 25;
-      character.abilityScores.str = 2;
-      character.abilityScores.con = 21;
+      character.abilityScores.str = 0;
+      character.abilityScores.con = 35;
       
       const errors = validateCharacter(character);
       expect(errors).toHaveLength(4);
