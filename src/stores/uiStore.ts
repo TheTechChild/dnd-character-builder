@@ -49,6 +49,9 @@ interface UIStore {
   isLoading: boolean;
   modals: ModalState;
   
+  // Selection State
+  selectedCharacterIds: string[];
+  
   // Toast notifications
   toasts: Toast[];
   
@@ -80,6 +83,12 @@ interface UIStore {
   removeToast: (id: string) => void;
   clearToasts: () => void;
   
+  // Actions - Selection
+  setSelectedCharacterIds: (ids: string[]) => void;
+  toggleCharacterSelection: (id: string) => void;
+  selectAllCharacters: (ids: string[]) => void;
+  clearSelection: () => void;
+  
   // Utility
   resetUIState: () => void;
 }
@@ -106,6 +115,7 @@ const initialState = {
     importExport: { isOpen: false },
     characterForm: { isOpen: false }
   },
+  selectedCharacterIds: [],
   toasts: []
 };
 
@@ -264,6 +274,36 @@ export const useUIStore = create<UIStore>()(
         clearToasts: () => {
           set((state) => {
             state.toasts = [];
+          });
+        },
+
+        // Selection actions
+        setSelectedCharacterIds: (ids) => {
+          set((state) => {
+            state.selectedCharacterIds = ids;
+          });
+        },
+
+        toggleCharacterSelection: (id) => {
+          set((state) => {
+            const index = state.selectedCharacterIds.indexOf(id);
+            if (index === -1) {
+              state.selectedCharacterIds.push(id);
+            } else {
+              state.selectedCharacterIds.splice(index, 1);
+            }
+          });
+        },
+
+        selectAllCharacters: (ids) => {
+          set((state) => {
+            state.selectedCharacterIds = ids;
+          });
+        },
+
+        clearSelection: () => {
+          set((state) => {
+            state.selectedCharacterIds = [];
           });
         },
 

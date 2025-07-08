@@ -218,3 +218,37 @@ export const useQuickActions = () => {
     saveCharacter
   };
 };
+
+// Selection hooks
+export const useSelectedCharacters = () => {
+  const selectedIds = useUIStore(state => state.selectedCharacterIds);
+  const characters = useCharacters();
+  const isAllSelected = selectedIds.length > 0 && selectedIds.length === characters.length;
+  
+  return {
+    selectedIds,
+    isAllSelected
+  };
+};
+
+export const useSelectedActions = () => {
+  const toggleCharacterSelection = useUIStore(state => state.toggleCharacterSelection);
+  const selectAllCharacters = useUIStore(state => state.selectAllCharacters);
+  const clearSelection = useUIStore(state => state.clearSelection);
+  const characters = useCharacters();
+  
+  const toggleSelectAll = () => {
+    const characterIds = characters.map(c => c.id);
+    selectAllCharacters(characterIds);
+  };
+  
+  const toggleSelect = (id: string) => {
+    toggleCharacterSelection(id);
+  };
+  
+  return {
+    toggleSelectAll,
+    toggleSelect,
+    clearSelection
+  };
+};

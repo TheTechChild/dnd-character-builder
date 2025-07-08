@@ -4,6 +4,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import Layout from './components/Layout'
 
 const Home = lazy(() => import('./pages/Home'))
+const CharacterList = lazy(() => import('./pages/CharacterList'))
 const CreateCharacter = lazy(() => import('./pages/CreateCharacter'))
 const ViewCharacter = lazy(() => import('./pages/ViewCharacter'))
 const EditCharacter = lazy(() => import('./pages/EditCharacter'))
@@ -22,6 +23,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="characters" element={<CharacterList />} />
+            <Route path="characters">
+              <Route path="new" element={<CreateCharacter />} />
+              <Route path=":id" element={<ViewCharacter />} />
+              <Route path=":id/edit" element={<EditCharacter />} />
+            </Route>
             <Route path="character">
               <Route path="new" element={<CreateCharacter />} />
               <Route path=":id" element={<ViewCharacter />} />
