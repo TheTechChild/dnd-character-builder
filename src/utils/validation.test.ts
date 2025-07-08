@@ -1,71 +1,127 @@
 import { describe, it, expect } from '@jest/globals';
-import { validateCharacter } from './validation';
+import { validateCharacterName, validateAbilityScore, validateLevel, validateCharacter } from './validation';
 import { createEmptyCharacter } from './character';
 
-describe('Character Validation', () => {
-  it('should validate a valid character', () => {
-    const character = createEmptyCharacter();
-    const result = validateCharacter(character);
-    expect(result.success).toBe(true);
-    expect(result.error).toBeUndefined();
+describe('Validation Utils', () => {
+  describe('validateCharacterName', () => {
+    it('should accept valid names', () => {
+      expect(validateCharacterName('Gandalf')).toBeNull();
+      expect(validateCharacterName('Jean-Luc Picard')).toBeNull();
+      expect(validateCharacterName("D'Artagnan")).toBeNull();
+      expect(validateCharacterName('Bilbo Baggins')).toBeNull();
+    });
+
+    it('should reject empty names', () => {
+      expect(validateCharacterName('')).toEqual({
+        field: 'name',
+        message: 'Character name is required'
+      });
+      expect(validateCharacterName('   ')).toEqual({
+        field: 'name',
+        message: 'Character name is required'
+      });
+    });
+
+    it('should reject names that are too short', () => {
+      expect(validateCharacterName('A')).toEqual({
+        field: 'name',
+        message: 'Character name must be at least 2 characters long'
+      });
+    });
+
+    it('should reject names that are too long', () => {
+      const longName = 'A'.repeat(51);
+      expect(validateCharacterName(longName)).toEqual({
+        field: 'name',
+        message: 'Character name must be no more than 50 characters'
+      });
+    });
+
+    it('should reject names with invalid characters', () => {
+      expect(validateCharacterName('Gandalf123')).toEqual({
+        field: 'name',
+        message: 'Character name can only contain letters, spaces, hyphens, and apostrophes'
+      });
+      expect(validateCharacterName('Bilbo@Baggins')).toEqual({
+        field: 'name',
+        message: 'Character name can only contain letters, spaces, hyphens, and apostrophes'
+      });
+    });
   });
 
-  it('should reject character with missing required fields', () => {
-    const invalidCharacter = {
-      name: 'Test',
-      level: 1,
-      // Missing many required fields
-    };
-    const result = validateCharacter(invalidCharacter);
-    expect(result.success).toBe(false);
-    expect(result.error).toBeDefined();
+  describe('validateAbilityScore', () => {
+    it('should accept valid ability scores', () => {
+      expect(validateAbilityScore(10, 'STR')).toBeNull();
+      expect(validateAbilityScore(3, 'DEX')).toBeNull();
+      expect(validateAbilityScore(20, 'CON')).toBeNull();
+    });
+
+    it('should reject scores below 3', () => {
+      expect(validateAbilityScore(2, 'STR')).toEqual({
+        field: 'STR',
+        message: 'STR score must be at least 3'
+      });
+      expect(validateAbilityScore(0, 'DEX')).toEqual({
+        field: 'DEX',
+        message: 'DEX score must be at least 3'
+      });
+    });
+
+    it('should reject scores above 20', () => {
+      expect(validateAbilityScore(21, 'CON')).toEqual({
+        field: 'CON',
+        message: 'CON score must be no more than 20'
+      });
+      expect(validateAbilityScore(30, 'INT')).toEqual({
+        field: 'INT',
+        message: 'INT score must be no more than 20'
+      });
+    });
   });
 
-  it('should reject character with invalid ability scores', () => {
-    const character = createEmptyCharacter();
-    character.abilityScores.str = 35; // Above max of 30
-    const result = validateCharacter(character);
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('abilityScores.str');
+  describe('validateLevel', () => {
+    it('should accept valid levels', () => {
+      expect(validateLevel(1)).toBeNull();
+      expect(validateLevel(10)).toBeNull();
+      expect(validateLevel(20)).toBeNull();
+    });
+
+    it('should reject levels below 1', () => {
+      expect(validateLevel(0)).toEqual({
+        field: 'level',
+        message: 'Level must be at least 1'
+      });
+    });
+
+    it('should reject levels above 20', () => {
+      expect(validateLevel(21)).toEqual({
+        field: 'level',
+        message: 'Level must be no more than 20'
+      });
+    });
   });
 
-  it('should reject character with invalid level', () => {
-    const character = createEmptyCharacter();
-    character.level = 25; // Above max of 20
-    const result = validateCharacter(character);
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('level');
-  });
+  describe('validateCharacter', () => {
+    it('should return no errors for a valid character', () => {
+      const character = createEmptyCharacter();
+      character.name = 'Aragorn';
+      const errors = validateCharacter(character);
+      expect(errors).toHaveLength(0);
+    });
 
-  it('should reject character with invalid death saves', () => {
-    const character = createEmptyCharacter();
-    character.deathSaves.successes = 5; // Above max of 3
-    const result = validateCharacter(character);
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('deathSaves.successes');
-  });
-
-  it('should accept character with optional fields missing', () => {
-    const character = createEmptyCharacter();
-    // These fields are optional
-    delete character.subrace;
-    delete character.subclass;
-    delete character.spellcastingAbility;
-    delete character.spells;
-    
-    const result = validateCharacter(character);
-    expect(result.success).toBe(true);
-  });
-
-  it('should validate arrays correctly', () => {
-    const character = createEmptyCharacter();
-    character.languages = ['Common', 'Elvish', 'Dwarvish'];
-    character.skills = [
-      { skill: 'perception', proficiency: 'proficient' },
-      { skill: 'stealth', proficiency: 'expertise' },
-    ];
-    
-    const result = validateCharacter(character);
-    expect(result.success).toBe(true);
+    it('should return multiple errors for invalid character', () => {
+      const character = createEmptyCharacter();
+      character.name = '';
+      character.level = 25;
+      character.abilityScores.str = 2;
+      character.abilityScores.con = 21;
+      
+      const errors = validateCharacter(character);
+      expect(errors).toHaveLength(4);
+      expect(errors.map(e => e.field)).toContain('name');
+      expect(errors.map(e => e.field)).toContain('level');
+      expect(errors.map(e => e.field)).toContain('STR');
+      expect(errors.map(e => e.field)).toContain('CON');
+    });
   });
 });

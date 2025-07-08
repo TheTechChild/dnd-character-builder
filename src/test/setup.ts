@@ -17,17 +17,19 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 // Mock localStorage
-const localStorageMock = {
+const localStorageMock: Storage = {
   getItem: jest.fn(),
   setItem: jest.fn(),
   removeItem: jest.fn(),
   clear: jest.fn(),
+  length: 0,
+  key: jest.fn(),
 };
-global.localStorage = localStorageMock as any;
+global.localStorage = localStorageMock;
 
 // Mock crypto.randomUUID for Node.js test environment
 if (!global.crypto) {
-  global.crypto = {} as any;
+  global.crypto = {} as Crypto;
 }
 if (!global.crypto.randomUUID) {
   global.crypto.randomUUID = () => {
@@ -35,6 +37,6 @@ if (!global.crypto.randomUUID) {
       const r = (Math.random() * 16) | 0;
       const v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
-    });
+    }) as `${string}-${string}-${string}-${string}-${string}`;
   };
 }
