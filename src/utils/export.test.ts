@@ -22,8 +22,8 @@ describe('Export Utils', () => {
       }
       return originalCreateElement.call(document, tagName);
     });
-    document.body.appendChild = jest.fn() as any;
-    document.body.removeChild = jest.fn() as any;
+    document.body.appendChild = jest.fn() as unknown as typeof document.body.appendChild;
+    document.body.removeChild = jest.fn() as unknown as typeof document.body.removeChild;
   });
 
   afterEach(() => {
