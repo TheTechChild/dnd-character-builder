@@ -45,3 +45,6 @@ coverage
 .env.test.local
 .env.production.local
 .env.local
+
+# Build output
+dist/
