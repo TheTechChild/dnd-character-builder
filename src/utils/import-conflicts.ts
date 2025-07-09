@@ -71,7 +71,7 @@ export function resolveConflict(
       return {
         ...conflict.importedCharacter,
         id: uuidv4(),
-        name: generateUniqueName(conflict.importedCharacter.name, conflict.existingCharacter.name),
+        name: `${conflict.importedCharacter.name} (Imported)`,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };

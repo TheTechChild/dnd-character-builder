@@ -8,6 +8,27 @@ jest.mock('dompurify', () => ({
   sanitize: jest.fn((text) => text.replace(/<[^>]*>/g, '')),
 }));
 
+// Mock File
+class MockFile {
+  content: string;
+  name: string;
+  type: string;
+  size: number;
+
+  constructor(content: string[], name: string, options?: { type?: string }) {
+    this.content = content.join('');
+    this.name = name;
+    this.type = options?.type || '';
+    this.size = this.content.length;
+  }
+
+  async text() {
+    return this.content;
+  }
+}
+
+global.File = MockFile as unknown as typeof File;
+
 // Mock characterSchemaV2
 jest.mock('@/schemas/characterSchemaV2', () => ({
   CharacterSchemaV2: {
@@ -16,12 +37,15 @@ jest.mock('@/schemas/characterSchemaV2', () => ({
 }));
 
 describe('Import Utilities', () => {
-  const mockCharacter = {
+  const mockCharacter: Character = {
     id: '123',
     name: 'Test Character',
     level: 1,
     class: 'Fighter',
     race: 'Human',
+    experiencePoints: 0,
+    background: 'Soldier',
+    alignment: 'Lawful Good',
     abilities: {
       strength: 10,
       dexterity: 10,
@@ -30,26 +54,64 @@ describe('Import Utilities', () => {
       wisdom: 10,
       charisma: 10,
     },
-    skills: [],
-    savingThrows: [],
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
+    skills: {
+      acrobatics: { proficient: false, expertise: false, modifier: 0 },
+      animalHandling: { proficient: false, expertise: false, modifier: 0 },
+      arcana: { proficient: false, expertise: false, modifier: 0 },
+      athletics: { proficient: false, expertise: false, modifier: 0 },
+      deception: { proficient: false, expertise: false, modifier: 0 },
+      history: { proficient: false, expertise: false, modifier: 0 },
+      insight: { proficient: false, expertise: false, modifier: 0 },
+      intimidation: { proficient: false, expertise: false, modifier: 0 },
+      investigation: { proficient: false, expertise: false, modifier: 0 },
+      medicine: { proficient: false, expertise: false, modifier: 0 },
+      nature: { proficient: false, expertise: false, modifier: 0 },
+      perception: { proficient: false, expertise: false, modifier: 0 },
+      performance: { proficient: false, expertise: false, modifier: 0 },
+      persuasion: { proficient: false, expertise: false, modifier: 0 },
+      religion: { proficient: false, expertise: false, modifier: 0 },
+      sleightOfHand: { proficient: false, expertise: false, modifier: 0 },
+      stealth: { proficient: false, expertise: false, modifier: 0 },
+      survival: { proficient: false, expertise: false, modifier: 0 },
+    },
+    savingThrows: {
+      strength: { proficient: false, modifier: 0 },
+      dexterity: { proficient: false, modifier: 0 },
+      constitution: { proficient: false, modifier: 0 },
+      intelligence: { proficient: false, modifier: 0 },
+      wisdom: { proficient: false, modifier: 0 },
+      charisma: { proficient: false, modifier: 0 },
+    },
     languages: ['Common'],
-    maxHitPoints: 10,
-    currentHitPoints: 10,
-    temporaryHitPoints: 0,
-    hitDice: '1d10',
+    hitPoints: { current: 10, max: 10, temp: 0 },
+    hitDice: { total: '1d10', current: 1, size: 10 },
     deathSaves: { successes: 0, failures: 0 },
     armorClass: 10,
     initiative: 0,
-    speed: 30,
+    speed: { base: 30 },
     equipment: [],
-    spells: [],
-    spellSlots: [],
+    attacks: [],
+    spells: undefined,
+    spellSlots: undefined,
+    spellcastingAbility: undefined,
+    spellSaveDC: undefined,
+    spellAttackBonus: undefined,
     features: [],
+    traits: [],
+    otherProficiencies: [],
+    currency: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
     proficiencyBonus: 2,
-    inspiration: false,
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:00:00Z',
-    version: 1,
+    version: '1',
   };
 
   const mockExportData = {
