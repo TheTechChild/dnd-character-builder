@@ -1,9 +1,12 @@
 import { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 import { getAbilityModifier } from '@/utils/calculations';
+import { EditableField } from './EditableField';
+import { useEditField } from '@/stores/editHooks';
 
 interface AbilityScoresProps {
   character: Character;
+  isEditMode?: boolean;
 }
 
 const ABILITY_NAMES = {
@@ -15,7 +18,8 @@ const ABILITY_NAMES = {
   charisma: 'CHA'
 } as const;
 
-export function AbilityScores({ character }: AbilityScoresProps) {
+export function AbilityScores({ character, isEditMode = false }: AbilityScoresProps) {
+  const { updateField } = useEditField();
   return (
     <div className={cn(
       "bg-white dark:bg-slate-900 rounded-lg p-4 border border-slate-200 dark:border-slate-700",
@@ -41,7 +45,23 @@ export function AbilityScores({ character }: AbilityScoresProps) {
               <div className="text-xs font-medium text-slate-600 dark:text-slate-400">
                 {ABILITY_NAMES[abilityKey]}
               </div>
-              <div className="text-2xl font-bold">{score}</div>
+              <div className="text-2xl font-bold">
+                <EditableField
+                  value={score}
+                  onSave={(value) => {
+                    updateField('abilities', {
+                      ...character.abilities,
+                      [abilityKey]: value
+                    });
+                  }}
+                  type="number"
+                  min={1}
+                  max={30}
+                  isEditMode={isEditMode}
+                  className="text-center"
+                  editClassName="text-center"
+                />
+              </div>
               <div className="text-sm font-medium">({modifierStr})</div>
               
               <div className="flex justify-center gap-1 mt-1">

@@ -5,6 +5,7 @@ import { SpellList } from '../components/SpellList';
 
 interface SpellcastingPageProps {
   character: Character;
+  isEditMode?: boolean;
 }
 
 export function SpellcastingPage({ character }: SpellcastingPageProps) {

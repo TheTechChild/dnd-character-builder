@@ -1,12 +1,16 @@
 import { Character } from '@/types/character';
 import { User } from 'lucide-react';
 import { cn } from '@/utils/cn';
+import { EditableField } from './EditableField';
+import { useEditField } from '@/stores/editHooks';
 
 interface CharacterHeaderProps {
   character: Character;
+  isEditMode?: boolean;
 }
 
-export function CharacterHeader({ character }: CharacterHeaderProps) {
+export function CharacterHeader({ character, isEditMode = false }: CharacterHeaderProps) {
+  const { updateField } = useEditField();
   return (
     <div className={cn(
       "bg-slate-100 dark:bg-slate-800 rounded-lg p-4",
@@ -31,7 +35,16 @@ export function CharacterHeader({ character }: CharacterHeaderProps) {
         </div>
         
         <div className="space-y-2">
-          <h1 className="text-2xl md:text-3xl font-bold">{character.name}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold">
+            <EditableField
+              value={character.name}
+              onSave={(value) => updateField('name', value)}
+              fieldName="name"
+              isEditMode={isEditMode}
+              placeholder="Character Name"
+              className="inline-block"
+            />
+          </h1>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm md:text-base">
             <div>

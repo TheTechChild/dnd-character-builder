@@ -10,12 +10,13 @@ import { DeathSaves } from '../components/DeathSaves';
 
 interface CoreStatsPageProps {
   character: Character;
+  isEditMode?: boolean;
 }
 
-export function CoreStatsPage({ character }: CoreStatsPageProps) {
+export function CoreStatsPage({ character, isEditMode = false }: CoreStatsPageProps) {
   return (
     <div className="space-y-4 print:space-y-2">
-      <CharacterHeader character={character} />
+      <CharacterHeader character={character} isEditMode={isEditMode} />
       
       <div className={cn(
         "grid gap-4",
@@ -23,7 +24,7 @@ export function CoreStatsPage({ character }: CoreStatsPageProps) {
         "print:grid-cols-2 print:gap-2"
       )}>
         <div className="space-y-4 print:space-y-2">
-          <AbilityScores character={character} />
+          <AbilityScores character={character} isEditMode={isEditMode} />
           
           <div className="grid gap-4 print:gap-2">
             <div className="text-center">

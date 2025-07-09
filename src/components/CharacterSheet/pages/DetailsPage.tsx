@@ -8,6 +8,7 @@ import { ProficienciesAndLanguages } from '../components/ProficienciesAndLanguag
 
 interface DetailsPageProps {
   character: Character;
+  isEditMode?: boolean;
 }
 
 export function DetailsPage({ character }: DetailsPageProps) {
