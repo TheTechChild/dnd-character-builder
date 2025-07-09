@@ -10,7 +10,7 @@ export function SpellList({ character }: SpellListProps) {
   const spellsObj = character.spells;
   
   // Convert the spells object to a format we can work with
-  const spellsByLevel: Record<number, any[]> = {};
+  const spellsByLevel: Record<number, typeof spellsObj.cantrips> = {};
   
   // Handle cantrips
   if (spellsObj?.cantrips) {
