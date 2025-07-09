@@ -108,13 +108,6 @@ export function resolveConflicts(
   return resolved;
 }
 
-function generateUniqueName(importedName: string, existingName: string): string {
-  if (importedName === existingName) {
-    return `${importedName} (Imported)`;
-  }
-  return importedName;
-}
-
 function mergeCharacters(
   existing: Character,
   imported: Character,
