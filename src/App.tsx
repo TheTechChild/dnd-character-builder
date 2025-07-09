@@ -9,6 +9,7 @@ const CreateCharacter = lazy(() => import('./pages/CreateCharacter'))
 const ViewCharacter = lazy(() => import('./pages/ViewCharacter'))
 const EditCharacter = lazy(() => import('./pages/EditCharacter'))
 const Settings = lazy(() => import('./pages/Settings'))
+const Reference = lazy(() => import('./pages/Reference'))
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -35,6 +36,7 @@ function App() {
               <Route path=":id/edit" element={<EditCharacter />} />
             </Route>
             <Route path="settings" element={<Settings />} />
+            <Route path="reference" element={<Reference />} />
           </Route>
         </Routes>
       </Suspense>
