@@ -36,6 +36,9 @@ export function getAbilityModifier(score: number): number {
   return Math.floor((score - 10) / 2);
 }
 
+// Alias for backward compatibility
+export const calculateAbilityModifier = getAbilityModifier;
+
 export function getProficiencyBonus(level: number): number {
   return Math.ceil(level / 4) + 1;
 }
