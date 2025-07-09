@@ -85,86 +85,126 @@ const CharacterList: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-2 sm:px-4 py-4 md:py-8">
       {/* Header */}
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 md:mb-8">
         <div>
-          <h1 className="text-3xl font-bold">My Characters</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-2xl md:text-3xl font-bold">My Characters</h1>
+          <p className="text-gray-600 mt-1 text-sm md:text-base">
             {characters.length} {characters.length === 1 ? 'character' : 'characters'}
           </p>
         </div>
-        <Link to="/characters/new">
-          <Button>
+        <Link to="/characters/new" className="w-full sm:w-auto">
+          <Button className="touch-target w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
-            New Character
+            <span className="hidden sm:inline">New Character</span>
+            <span className="sm:hidden">Create</span>
           </Button>
         </Link>
       </div>
 
       {/* Search and Controls */}
-      <div className="space-y-4 mb-6">
-        <div className="flex gap-4">
+      <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
+        <div className="flex flex-col md:flex-row gap-3 md:gap-4">
           {/* Search */}
-          <div className="flex-1 relative">
+          <div className="flex-1 max-w-full md:max-w-md relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
               type="text"
               placeholder="Search characters..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
+              className="pl-10 touch-target"
             />
           </div>
 
-          {/* Filter Toggle */}
-          <Button
-            variant="outline"
-            onClick={() => setShowFilters(!showFilters)}
-            className={showFilters ? 'bg-gray-100' : ''}
-          >
-            <Filter className="w-4 h-4 mr-2" />
-            Filters
-            {((filters.class && filters.class.length > 0) || (filters.race && filters.race.length > 0) || filters.minLevel !== undefined || filters.maxLevel !== undefined) && (
-              <span className="ml-2 bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs">
-                {(filters.class?.length || 0) + (filters.race?.length || 0) + (filters.minLevel !== undefined ? 1 : 0) + (filters.maxLevel !== undefined ? 1 : 0)}
-              </span>
-            )}
-          </Button>
-
-          {/* Sort */}
-          <Select
-            value={sortBy}
-            onValueChange={(value) => setSortBy(value as SortBy)}
-          >
-            <SelectTrigger className="w-48">
-              <SelectValue placeholder="Sort by">
-                Sort by {sortOptions.find(opt => opt.value === sortBy)?.label}
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              {sortOptions.map(option => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          {/* Sort Order */}
-          <Button
-            variant="outline"
-            onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-            className="px-3"
-          >
-            {sortOrder === 'asc' ? '↑' : '↓'}
-          </Button>
-
-          {/* View Mode Toggle */}
-          <div className="flex border rounded-md">
+          {/* Mobile Controls */}
+          <div className="flex gap-2 md:hidden">
             <Button
-              variant={viewMode === 'grid' ? 'default' : 'ghost'}
-              size="sm"
+              variant="outline"
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex-1 touch-target ${showFilters ? 'bg-gray-100' : ''}`}
+            >
+              <Filter className="w-4 h-4 mr-2" />
+              <span>Filters</span>
+              {((filters.class && filters.class.length > 0) || (filters.race && filters.race.length > 0) || filters.minLevel !== undefined || filters.maxLevel !== undefined) && (
+                <span className="ml-2 bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs">
+                  {(filters.class?.length || 0) + (filters.race?.length || 0) + (filters.minLevel !== undefined ? 1 : 0) + (filters.maxLevel !== undefined ? 1 : 0)}
+                </span>
+              )}
+            </Button>
+            
+            {/* View Mode Toggle Mobile */}
+            <div className="flex border rounded-md">
+              <Button
+                variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('grid')}
+                className="rounded-r-none touch-target-sm"
+              >
+                <Grid3X3 className="w-4 h-4" />
+              </Button>
+              <Button
+                variant={viewMode === 'list' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('list')}
+                className="rounded-l-none touch-target-sm"
+              >
+                <List className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+          
+          {/* Desktop Controls */}
+          <div className="hidden md:flex items-center gap-4">
+            {/* Filter Toggle */}
+            <Button
+              variant="outline"
+              onClick={() => setShowFilters(!showFilters)}
+              className={showFilters ? 'bg-gray-100' : ''}
+            >
+              <Filter className="w-4 h-4 mr-2" />
+              Filters
+              {((filters.class && filters.class.length > 0) || (filters.race && filters.race.length > 0) || filters.minLevel !== undefined || filters.maxLevel !== undefined) && (
+                <span className="ml-2 bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs">
+                  {(filters.class?.length || 0) + (filters.race?.length || 0) + (filters.minLevel !== undefined ? 1 : 0) + (filters.maxLevel !== undefined ? 1 : 0)}
+                </span>
+              )}
+            </Button>
+
+            {/* Sort */}
+            <Select
+              value={sortBy}
+              onValueChange={(value) => setSortBy(value as SortBy)}
+            >
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Sort by">
+                  Sort by {sortOptions.find(opt => opt.value === sortBy)?.label}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {sortOptions.map(option => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Sort Order */}
+            <Button
+              variant="outline"
+              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+              className="px-3"
+            >
+              {sortOrder === 'asc' ? '↑' : '↓'}
+            </Button>
+
+            {/* View Mode Toggle Desktop */}
+            <div className="flex border rounded-md">
+              <Button
+                variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                size="sm"
               onClick={() => setViewMode('grid')}
               className="rounded-r-none"
             >
@@ -178,17 +218,18 @@ const CharacterList: React.FC = () => {
             >
               <List className="w-4 h-4" />
             </Button>
+            </div>
           </div>
         </div>
 
         {/* Filters Panel */}
         {showFilters && (
-          <div className="bg-gray-50 p-4 rounded-lg space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-gray-50 p-3 md:p-4 rounded-lg space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
               {/* Class Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">Class</label>
-                <div className="space-y-2 max-h-40 overflow-y-auto p-2 border rounded-md">
+                <div className="space-y-2 max-h-32 md:max-h-40 overflow-y-auto p-2 border rounded-md bg-white">
                   {uniqueClasses.map(cls => (
                     <label key={cls} className="flex items-center gap-2 cursor-pointer">
                       <Checkbox
@@ -288,7 +329,7 @@ const CharacterList: React.FC = () => {
       ) : (
         <>
           {viewMode === 'grid' ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
               {characters.map((character) => (
                 <CharacterCard
                   key={character.id}
@@ -301,8 +342,8 @@ const CharacterList: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-2">
-              {/* List Header */}
-              <div className="grid grid-cols-12 gap-4 px-4 py-2 font-medium text-sm text-gray-600 border-b">
+              {/* List Header - Desktop Only */}
+              <div className="hidden md:grid grid-cols-12 gap-4 px-4 py-2 font-medium text-sm text-gray-600 border-b">
                 <div className="col-span-1">
                   <Checkbox
                     checked={isAllSelected}

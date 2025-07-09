@@ -33,10 +33,36 @@ export const CharacterListItem: React.FC<CharacterListItemProps> = React.memo(({
     <div className="relative group">
       <Link
         to={`/characters/${character.id}`}
-        className="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-50 rounded-lg items-center"
+        className="block md:grid md:grid-cols-12 gap-4 px-3 md:px-4 py-3 hover:bg-gray-50 rounded-lg"
       >
+        {/* Mobile Layout */}
+        <div className="md:hidden flex items-center gap-3">
+          <Checkbox
+            checked={isSelected}
+            onCheckedChange={onSelect}
+            onClick={(e) => e.stopPropagation()}
+            className="touch-target-sm"
+          />
+          <div className="flex-1">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-semibold text-gray-600">
+                  {name?.charAt(0)?.toUpperCase() || '?'}
+                </span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium truncate">{name || 'Unnamed Character'}</p>
+                <p className="text-xs text-gray-600">
+                  Level {level || 1} {race || 'Unknown'} {characterClass || 'Adventurer'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Desktop Layout */}
         {/* Checkbox */}
-        <div className="col-span-1">
+        <div className="hidden md:block col-span-1">
           <Checkbox
             checked={isSelected}
             onCheckedChange={onSelect}
@@ -45,7 +71,7 @@ export const CharacterListItem: React.FC<CharacterListItemProps> = React.memo(({
         </div>
 
         {/* Name */}
-        <div className="col-span-3">
+        <div className="hidden md:block col-span-3">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
               <span className="text-sm font-bold text-gray-600">
@@ -57,27 +83,27 @@ export const CharacterListItem: React.FC<CharacterListItemProps> = React.memo(({
         </div>
 
         {/* Class */}
-        <div className="col-span-2 text-sm text-gray-600 truncate">
+        <div className="hidden md:block col-span-2 text-sm text-gray-600 truncate">
           {characterClass || 'Adventurer'}
         </div>
 
         {/* Race */}
-        <div className="col-span-2 text-sm text-gray-600 truncate">
+        <div className="hidden md:block col-span-2 text-sm text-gray-600 truncate">
           {race || 'Unknown'}
         </div>
 
         {/* Level */}
-        <div className="col-span-1 text-sm text-gray-600">
+        <div className="hidden md:block col-span-1 text-sm text-gray-600">
           {level || 1}
         </div>
 
         {/* Last Modified */}
-        <div className="col-span-2 text-sm text-gray-500">
+        <div className="hidden md:block col-span-2 text-sm text-gray-500">
           {character.updatedAt ? formatDistanceToNow(new Date(character.updatedAt)) : 'Never'}
         </div>
 
         {/* Actions */}
-        <div className="col-span-1 flex justify-end">
+        <div className="hidden md:flex col-span-1 justify-end">
           <div className="relative">
             <button
               onClick={(e: React.MouseEvent) => {
@@ -85,7 +111,7 @@ export const CharacterListItem: React.FC<CharacterListItemProps> = React.memo(({
                 e.stopPropagation();
                 setShowActions(!showActions);
               }}
-              className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-gray-600 transition-all p-1 rounded"
+              className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-gray-600 transition-all p-2 rounded touch-target-sm"
             >
               <MoreVertical className="w-4 h-4" />
             </button>
@@ -130,6 +156,20 @@ export const CharacterListItem: React.FC<CharacterListItemProps> = React.memo(({
               </div>
             )}
           </div>
+        </div>
+        
+        {/* Mobile Actions */}
+        <div className="md:hidden absolute top-3 right-3">
+          <button
+            onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setShowActions(!showActions);
+            }}
+            className="text-gray-400 hover:text-gray-600 transition-all p-2 rounded touch-target-sm"
+          >
+            <MoreVertical className="w-4 h-4" />
+          </button>
         </div>
       </Link>
 

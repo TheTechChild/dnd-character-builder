@@ -15,17 +15,18 @@ export default function BasicInfoStep({ onNext }: WizardStepProps) {
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-semibold text-gray-900">Basic Information</h2>
-      <p className="text-gray-600">Let's start with the basics of your character.</p>
+    <div className="space-y-4 md:space-y-6">
+      <h2 className="text-xl md:text-2xl font-semibold text-gray-900">Basic Information</h2>
+      <p className="text-sm md:text-base text-gray-600">Let's start with the basics of your character.</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
         <div>
-          <Label htmlFor="name">Character Name *</Label>
+          <Label htmlFor="name" className="text-sm md:text-base">Character Name *</Label>
           <Input
             id="name"
             {...register('name', { required: 'Character name is required' })}
             placeholder="Enter character name"
+            className="touch-target"
           />
           {errors.name && (
             <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -46,6 +47,7 @@ export default function BasicInfoStep({ onNext }: WizardStepProps) {
           <Select
             id="race"
             {...register('race', { required: 'Race is required' })}
+            className="touch-target"
           >
             <option value="">Select a race</option>
             {RACES.map(race => (

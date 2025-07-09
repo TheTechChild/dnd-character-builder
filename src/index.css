@@ -108,33 +108,54 @@
     font: inherit;
   }
 
-  /* Typography */
+  /* Responsive Typography System */
   h1 {
-    @apply text-4xl font-bold leading-tight;
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold leading-tight;
   }
 
   h2 {
-    @apply text-3xl font-semibold leading-tight;
+    @apply text-xl md:text-2xl lg:text-3xl font-semibold leading-tight;
   }
 
   h3 {
-    @apply text-2xl font-semibold leading-tight;
+    @apply text-lg md:text-xl lg:text-2xl font-semibold leading-tight;
   }
 
   h4 {
-    @apply text-xl font-semibold leading-tight;
+    @apply text-base md:text-lg lg:text-xl font-semibold leading-tight;
   }
 
   h5 {
-    @apply text-lg font-semibold leading-tight;
+    @apply text-sm md:text-base lg:text-lg font-semibold leading-tight;
   }
 
   h6 {
-    @apply text-base font-semibold leading-tight;
+    @apply text-sm md:text-base font-semibold leading-tight;
   }
 
   p {
-    @apply text-base leading-relaxed;
+    @apply text-sm md:text-base leading-relaxed;
+  }
+
+  /* Responsive Font Sizes */
+  .text-xs {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+  }
+  
+  .text-sm {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+  
+  .text-base {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+  }
+  
+  .text-lg {
+    font-size: clamp(1.125rem, 3.5vw, 1.25rem);
+  }
+  
+  .text-xl {
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
   }
 
   /* Links */
@@ -199,5 +220,46 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  /* Touch-friendly tap targets (44x44px minimum) */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .touch-target-sm {
+    @apply min-h-[36px] min-w-[36px] md:min-h-[44px] md:min-w-[44px];
+  }
+  
+  /* Responsive spacing */
+  .responsive-padding {
+    @apply px-4 py-3 md:px-6 md:py-4 lg:px-8 lg:py-5;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Safe area insets for mobile devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
   }
 }
