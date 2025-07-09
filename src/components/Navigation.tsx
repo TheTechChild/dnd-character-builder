@@ -21,6 +21,9 @@ function Navigation() {
       <NavLink to="/character/new" className={navLinkClass}>
         Create Character
       </NavLink>
+      <NavLink to="/reference" className={navLinkClass}>
+        Reference
+      </NavLink>
       <NavLink to="/settings" className={navLinkClass}>
         Settings
       </NavLink>
