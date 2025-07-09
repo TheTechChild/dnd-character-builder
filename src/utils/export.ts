@@ -107,7 +107,7 @@ export function isBatchExport(data: unknown): data is BatchExport {
     typeof data === 'object' &&
     'metadata' in data &&
     'characters' in data &&
-    Array.isArray((data as any).characters)
+    Array.isArray((data as { characters: unknown }).characters)
   );
 }
 

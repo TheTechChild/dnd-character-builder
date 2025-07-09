@@ -112,7 +112,7 @@ function addSkills(pdf: jsPDF, character: Character): void {
   
   // List proficient skills
   const proficientSkills = Object.entries(character.skills)
-    .filter(([_, skill]) => skill.proficient)
+    .filter(([, skill]) => skill.proficient)
     .map(([skillName]) => skillName);
     
   if (proficientSkills.length > 0) {
@@ -155,7 +155,7 @@ function addCombatStats(pdf: jsPDF, character: Character): void {
   y = 138;
   
   const savingThrows = Object.entries(character.savingThrows)
-    .filter(([_, save]) => save.proficient)
+    .filter(([, save]) => save.proficient)
     .map(([ability]) => ability);
   
   savingThrows.forEach((save) => {
@@ -211,7 +211,7 @@ function addSpells(pdf: jsPDF, character: Character): void {
   pdf.setFontSize(10);
   let y = 70;
   
-  const spellsByLevel: Record<string, any[]> = {};
+  const spellsByLevel: Record<string, string[]> = {};
   
   // Group spells by level
   if (character.spells) {
@@ -240,8 +240,8 @@ function addSpells(pdf: jsPDF, character: Character): void {
     y += 8;
     
     pdf.setFontSize(10);
-    spells.forEach((spell: any) => {
-      pdf.text(`• ${spell.name}`, 25, y);
+    spells.forEach((spell) => {
+      pdf.text(`• ${spell}`, 25, y);
       y += 6;
     });
     
@@ -269,23 +269,4 @@ function addNotes(pdf: jsPDF, character: Character): void {
     pdf.text(line, 20, y);
     y += 6;
   });
-}
-
-function getHitDieByClass(className: string): number {
-  const hitDice: Record<string, number> = {
-    barbarian: 12,
-    fighter: 10,
-    paladin: 10,
-    ranger: 10,
-    bard: 8,
-    cleric: 8,
-    druid: 8,
-    monk: 8,
-    rogue: 8,
-    warlock: 8,
-    sorcerer: 6,
-    wizard: 6,
-  };
-  
-  return hitDice[className.toLowerCase()] || 8;
 }

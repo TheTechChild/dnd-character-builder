@@ -9,6 +9,7 @@ import {
   isBatchExport,
   getExportVersion,
   isCompatibleVersion,
+  type CharacterExport,
 } from '../export';
 import { Character } from '@/types/character';
 
@@ -22,9 +23,9 @@ const originalBlob = global.Blob;
 // Mock Blob
 class MockBlob {
   content: string[];
-  options: any;
+  options: { type?: string } | undefined;
   
-  constructor(content: string[], options?: any) {
+  constructor(content: string[], options?: { type?: string }) {
     this.content = content;
     this.options = options;
     this.type = options?.type || '';
@@ -37,7 +38,7 @@ class MockBlob {
   }
 }
 
-global.Blob = MockBlob as any;
+global.Blob = MockBlob as unknown as typeof Blob;
 
 describe('Export Utilities', () => {
   beforeEach(() => {
