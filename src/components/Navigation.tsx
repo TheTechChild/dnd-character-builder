@@ -1,4 +1,7 @@
 import { NavLink } from 'react-router-dom'
+import { Dices } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useDiceStore } from '@/stores/diceStore'
 
 function Navigation() {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -8,8 +11,10 @@ function Navigation() {
         : 'text-indigo-100 hover:bg-indigo-500 hover:text-white'
     }`
 
+  const { showFloatingWidget, setShowFloatingWidget } = useDiceStore();
+
   return (
-    <nav className="flex space-x-4">
+    <nav className="flex items-center space-x-4">
       <NavLink to="/" className={navLinkClass}>
         Home
       </NavLink>
@@ -19,6 +24,15 @@ function Navigation() {
       <NavLink to="/settings" className={navLinkClass}>
         Settings
       </NavLink>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setShowFloatingWidget(!showFloatingWidget)}
+        className="text-indigo-100 hover:bg-indigo-500 hover:text-white"
+        title={showFloatingWidget ? "Hide dice roller" : "Show dice roller"}
+      >
+        <Dices className="h-4 w-4" />
+      </Button>
     </nav>
   )
 }

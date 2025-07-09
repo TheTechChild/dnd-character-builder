@@ -1,12 +1,13 @@
 import { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 import { CharacterHeader } from '../components/CharacterHeader';
-import { AbilityScores } from '../components/AbilityScores';
-import { Skills } from '../components/Skills';
-import { SavingThrows } from '../components/SavingThrows';
+import { AbilityScoresWithDice } from '../components/AbilityScoresWithDice';
+import { SkillsWithDice } from '../components/SkillsWithDice';
+import { SavingThrowsWithDice } from '../components/SavingThrowsWithDice';
 import { CombatStats } from '../components/CombatStats';
 import { Attacks } from '../components/Attacks';
-import { DeathSaves } from '../components/DeathSaves';
+import { DeathSavesWithDice } from '../components/DeathSavesWithDice';
+import { QuickStats } from '../components/QuickStats';
 
 interface CoreStatsPageProps {
   character: Character;
@@ -24,27 +25,14 @@ export function CoreStatsPage({ character, isEditMode = false }: CoreStatsPagePr
         "print:grid-cols-2 print:gap-2"
       )}>
         <div className="space-y-4 print:space-y-2">
-          <AbilityScores character={character} isEditMode={isEditMode} />
+          <AbilityScoresWithDice character={character} isEditMode={isEditMode} />
           
-          <div className="grid gap-4 print:gap-2">
-            <div className="text-center">
-              <div className="text-lg font-semibold">Proficiency Bonus</div>
-              <div className="text-3xl font-bold">+{character.proficiencyBonus || 2}</div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-lg font-semibold">Initiative</div>
-              <div className="text-3xl font-bold">
-                {character.initiative >= 0 ? '+' : ''}
-                {character.initiative || 0}
-              </div>
-            </div>
-          </div>
+          <QuickStats character={character} />
         </div>
         
         <div className="space-y-4 print:space-y-2">
-          <Skills character={character} />
-          <SavingThrows character={character} />
+          <SkillsWithDice character={character} />
+          <SavingThrowsWithDice character={character} />
         </div>
       </div>
       
@@ -57,7 +45,7 @@ export function CoreStatsPage({ character, isEditMode = false }: CoreStatsPagePr
           "print:grid-cols-2 print:gap-2 print:mt-2"
         )}>
           <Attacks character={character} />
-          <DeathSaves character={character} />
+          <DeathSavesWithDice character={character} />
         </div>
       </div>
     </div>
