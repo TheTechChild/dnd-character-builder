@@ -1,4 +1,4 @@
-import { Character } from '@/types/character';
+import { Character, Spell } from '@/types/character';
 import { cn } from '@/utils/cn';
 import { ScrollText, Circle, CircleDot } from 'lucide-react';
 
@@ -10,10 +10,10 @@ export function SpellList({ character }: SpellListProps) {
   const spellsObj = character.spells;
   
   // Convert the spells object to a format we can work with
-  const spellsByLevel: Record<number, Character['spells'] extends undefined ? never : NonNullable<Character['spells']>['cantrips']> = {};
+  const spellsByLevel: Record<number, Spell[]> = {};
   
   // Handle cantrips
-  if (spellsObj && 'cantrips' in spellsObj) {
+  if (spellsObj?.cantrips) {
     spellsByLevel[0] = spellsObj.cantrips;
   }
   
