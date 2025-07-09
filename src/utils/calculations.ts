@@ -38,6 +38,8 @@ export function getAbilityModifier(score: number): number {
 
 // Alias for backward compatibility
 export const calculateAbilityModifier = getAbilityModifier;
+export const calculateModifier = getAbilityModifier;
+export const calculateProficiencyBonus = getProficiencyBonus;
 
 export function getProficiencyBonus(level: number): number {
   return Math.ceil(level / 4) + 1;
