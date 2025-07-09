@@ -13,12 +13,16 @@ jest.mock('uuid', () => ({
 }));
 
 describe('Import Conflicts', () => {
-  const createCharacter = (overrides: Partial<Character> = {}): Character => ({
+  const createCharacter = (overrides: Partial<Character> = {}): Character => {
+  const base: Character = {
     id: '123',
     name: 'Test Character',
     level: 1,
     class: 'Fighter',
     race: 'Human',
+    experiencePoints: 0,
+    background: 'Soldier',
+    alignment: 'Lawful Good',
     abilities: {
       strength: 10,
       dexterity: 10,
@@ -27,28 +31,68 @@ describe('Import Conflicts', () => {
       wisdom: 10,
       charisma: 10,
     },
-    skills: [],
-    savingThrows: [],
+    skills: {
+      acrobatics: { proficient: false, expertise: false, modifier: 0 },
+      animalHandling: { proficient: false, expertise: false, modifier: 0 },
+      arcana: { proficient: false, expertise: false, modifier: 0 },
+      athletics: { proficient: false, expertise: false, modifier: 0 },
+      deception: { proficient: false, expertise: false, modifier: 0 },
+      history: { proficient: false, expertise: false, modifier: 0 },
+      insight: { proficient: false, expertise: false, modifier: 0 },
+      intimidation: { proficient: false, expertise: false, modifier: 0 },
+      investigation: { proficient: false, expertise: false, modifier: 0 },
+      medicine: { proficient: false, expertise: false, modifier: 0 },
+      nature: { proficient: false, expertise: false, modifier: 0 },
+      perception: { proficient: false, expertise: false, modifier: 0 },
+      performance: { proficient: false, expertise: false, modifier: 0 },
+      persuasion: { proficient: false, expertise: false, modifier: 0 },
+      religion: { proficient: false, expertise: false, modifier: 0 },
+      sleightOfHand: { proficient: false, expertise: false, modifier: 0 },
+      stealth: { proficient: false, expertise: false, modifier: 0 },
+      survival: { proficient: false, expertise: false, modifier: 0 },
+    },
+    savingThrows: {
+      strength: { proficient: false, modifier: 0 },
+      dexterity: { proficient: false, modifier: 0 },
+      constitution: { proficient: false, modifier: 0 },
+      intelligence: { proficient: false, modifier: 0 },
+      wisdom: { proficient: false, modifier: 0 },
+      charisma: { proficient: false, modifier: 0 },
+    },
     languages: ['Common'],
-    maxHitPoints: 10,
-    currentHitPoints: 10,
-    temporaryHitPoints: 0,
-    hitDice: '1d10',
+    hitPoints: { current: 10, max: 10, temp: 0 },
+    hitDice: { total: '1d10', current: 1, size: 10 },
     deathSaves: { successes: 0, failures: 0 },
     armorClass: 10,
     initiative: 0,
-    speed: 30,
-    equipment: [],
-    spells: [],
-    spellSlots: [],
+    speed: { base: 30 },
+    spells: undefined,
+    spellSlots: undefined,
+    spellcastingAbility: undefined,
+    spellSaveDC: undefined,
+    spellAttackBonus: undefined,
     features: [],
+    attacks: [],
+    equipment: [],
+    currency: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
+    traits: [],
+    otherProficiencies: [],
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     proficiencyBonus: 2,
-    inspiration: false,
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:00:00Z',
-    version: 1,
-    ...overrides,
-  });
+    version: '2',
+  };
+  
+  return { ...base, ...overrides };
+};
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -141,12 +185,18 @@ describe('Import Conflicts', () => {
       const conflictWithSkills = {
         existingCharacter: createCharacter({ 
           id: '123', 
-          skills: ['Athletics'], 
+          skills: {
+            ...createCharacter().skills,
+            athletics: { proficient: true, expertise: false, modifier: 3 }
+          },
           notes: 'Original notes' 
         }),
         importedCharacter: createCharacter({ 
           id: '456', 
-          skills: ['Stealth'], 
+          skills: {
+            ...createCharacter().skills,
+            stealth: { proficient: true, expertise: false, modifier: 2 }
+          },
           notes: 'Imported notes',
           level: 5,
         }),
@@ -157,8 +207,8 @@ describe('Import Conflicts', () => {
       expect(result).not.toBeNull();
       expect(result?.id).toBe('123'); // Keep existing ID
       expect(result?.level).toBe(5); // Use imported level
-      expect(result?.skills).toContain('Athletics');
-      expect(result?.skills).toContain('Stealth');
+      expect(result?.skills.athletics.proficient).toBe(true);
+      expect(result?.skills.stealth.proficient).toBe(true);
       expect(result?.notes).toContain('Original notes');
       expect(result?.notes).toContain('Imported notes');
     });

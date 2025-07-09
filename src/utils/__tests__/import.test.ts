@@ -1,5 +1,7 @@
 import { parseImportFile, validateCharacter, importCharacterFromFile, sanitizeCharacterData } from '../import';
-import { characterSchemaV2 } from '@/schemas/characterSchemaV2';
+import { CharacterSchemaV2 } from '@/schemas/characterSchemaV2';
+import { CharacterExport } from '../export';
+import { Character } from '@/types/character';
 
 // Mock DOMPurify
 jest.mock('dompurify', () => ({
@@ -8,7 +10,7 @@ jest.mock('dompurify', () => ({
 
 // Mock characterSchemaV2
 jest.mock('@/schemas/characterSchemaV2', () => ({
-  characterSchemaV2: {
+  CharacterSchemaV2: {
     safeParse: jest.fn(),
   },
 }));
@@ -74,8 +76,8 @@ describe('Import Utilities', () => {
 
       const sanitized = sanitizeCharacterData(character);
       
-      expect(sanitized.name).toBe('Test alert("xss")');
-      expect(sanitized.notes).toBe('Some bold text');
+      expect((sanitized as Character).name).toBe('Test alert("xss")');
+      expect((sanitized as Character).notes).toBe('Some bold text');
     });
 
     it('should sanitize equipment names and descriptions', () => {
@@ -93,8 +95,8 @@ describe('Import Utilities', () => {
 
       const sanitized = sanitizeCharacterData(character);
       
-      expect(sanitized.equipment[0].name).toBe('Sword alert("xss")');
-      expect(sanitized.equipment[0].description).toBe('A sharp sword');
+      expect((sanitized as Character).equipment[0].name).toBe('Sword alert("xss")');
+      expect((sanitized as Character).equipment[0].description).toBe('A sharp sword');
     });
 
     it('should handle non-object input', () => {
@@ -185,13 +187,13 @@ describe('Import Utilities', () => {
       const result = await parseImportFile(file, { sanitize: true });
 
       expect(result.success).toBe(true);
-      expect(result.data?.character.name).toBe('Test alert("xss")');
+      expect((result.data as CharacterExport)?.character.name).toBe('Test alert("xss")');
     });
   });
 
   describe('validateCharacter', () => {
     it('should validate valid character data', () => {
-      (characterSchemaV2.safeParse as jest.Mock).mockReturnValue({
+      (CharacterSchemaV2.safeParse as jest.Mock).mockReturnValue({
         success: true,
         data: mockCharacter,
       });
@@ -200,11 +202,11 @@ describe('Import Utilities', () => {
 
       expect(result.success).toBe(true);
       expect(result.data).toEqual(mockCharacter);
-      expect(characterSchemaV2.safeParse).toHaveBeenCalledWith(mockCharacter);
+      expect(CharacterSchemaV2.safeParse).toHaveBeenCalledWith(mockCharacter);
     });
 
     it('should return validation errors', () => {
-      (characterSchemaV2.safeParse as jest.Mock).mockReturnValue({
+      (CharacterSchemaV2.safeParse as jest.Mock).mockReturnValue({
         success: false,
         error: {
           errors: [
@@ -231,7 +233,7 @@ describe('Import Utilities', () => {
     });
 
     it('should handle validation exceptions', () => {
-      (characterSchemaV2.safeParse as jest.Mock).mockImplementation(() => {
+      (CharacterSchemaV2.safeParse as jest.Mock).mockImplementation(() => {
         throw new Error('Validation error');
       });
 
@@ -249,7 +251,7 @@ describe('Import Utilities', () => {
         type: 'application/json',
       });
 
-      (characterSchemaV2.safeParse as jest.Mock).mockReturnValue({
+      (CharacterSchemaV2.safeParse as jest.Mock).mockReturnValue({
         success: true,
         data: mockCharacter,
       });
@@ -284,7 +286,7 @@ describe('Import Utilities', () => {
         type: 'application/json',
       });
 
-      (characterSchemaV2.safeParse as jest.Mock).mockReturnValue({
+      (CharacterSchemaV2.safeParse as jest.Mock).mockReturnValue({
         success: false,
         error: {
           errors: [{ path: ['name'], message: 'Invalid name' }],

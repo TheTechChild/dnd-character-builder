@@ -141,15 +141,17 @@ function mergeCharacters(
     createdAt: existing.createdAt, // Keep original creation date
     updatedAt: new Date().toISOString(),
     
-    // Merge arrays by combining unique values
-    skills: [...new Set([...base.skills, ...override.skills])],
+    // Merge skills and saving throws - prefer proficient skills
+    skills: mergeSkills(base.skills, override.skills),
+    savingThrows: mergeSavingThrows(base.savingThrows, override.savingThrows),
     languages: [...new Set([...base.languages, ...override.languages])],
-    savingThrows: [...new Set([...base.savingThrows, ...override.savingThrows])],
     
-    // For equipment and spells, prefer the list with more items
+    // For equipment and features, prefer the list with more items
     equipment: base.equipment.length >= override.equipment.length ? base.equipment : override.equipment,
-    spells: base.spells.length >= override.spells.length ? base.spells : override.spells,
     features: base.features.length >= override.features.length ? base.features : override.features,
+    
+    // Merge spells if they exist
+    spells: mergeSpells(base.spells, override.spells),
     
     // Merge notes by combining if different
     notes: mergeNotes(base.notes, override.notes),
@@ -164,6 +166,46 @@ function mergeNotes(notes1?: string, notes2?: string): string | undefined {
   if (notes1 === notes2) return notes1;
   
   return `${notes1}\n\n--- Imported Notes ---\n\n${notes2}`;
+}
+
+function mergeSkills(base: Character['skills'], override: Character['skills']): Character['skills'] {
+  const merged = { ...base };
+  
+  // For each skill, prefer the one with higher proficiency/expertise
+  Object.entries(override).forEach(([skill, value]) => {
+    const baseSkill = base[skill as keyof Character['skills']];
+    if (value.expertise || (value.proficient && !baseSkill.proficient)) {
+      merged[skill as keyof Character['skills']] = value;
+    }
+  });
+  
+  return merged;
+}
+
+function mergeSavingThrows(base: Character['savingThrows'], override: Character['savingThrows']): Character['savingThrows'] {
+  const merged = { ...base };
+  
+  // For each saving throw, prefer the one with proficiency
+  Object.entries(override).forEach(([ability, value]) => {
+    const baseSave = base[ability as keyof Character['savingThrows']];
+    if (value.proficient && !baseSave.proficient) {
+      merged[ability as keyof Character['savingThrows']] = value;
+    }
+  });
+  
+  return merged;
+}
+
+function mergeSpells(base?: Character['spells'], override?: Character['spells']): Character['spells'] {
+  if (!base && !override) return undefined;
+  if (!base) return override;
+  if (!override) return base;
+  
+  // For spells, prefer the one with more total spells
+  const baseCount = Object.values(base).reduce((sum, level) => sum + level.length, 0);
+  const overrideCount = Object.values(override).reduce((sum, level) => sum + level.length, 0);
+  
+  return overrideCount > baseCount ? override : base;
 }
 
 export function autoResolveConflicts(

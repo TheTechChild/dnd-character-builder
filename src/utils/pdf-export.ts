@@ -217,7 +217,7 @@ function addSpells(pdf: jsPDF, character: Character): void {
   if (character.spells) {
     Object.entries(character.spells).forEach(([level, spellList]) => {
       if (Array.isArray(spellList) && spellList.length > 0) {
-        spellsByLevel[level] = spellList;
+        spellsByLevel[level] = spellList.map(spell => spell.name);
       }
     });
   }
@@ -261,7 +261,7 @@ function addNotes(pdf: jsPDF, character: Character): void {
   const lines = pdf.splitTextToSize(character.notes, 170);
   let y = 35;
   
-  lines.forEach((line) => {
+  lines.forEach((line: string) => {
     if (y > 270) {
       pdf.addPage();
       y = 20;

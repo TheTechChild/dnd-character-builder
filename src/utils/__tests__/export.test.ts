@@ -58,6 +58,7 @@ describe('Export Utilities', () => {
   const mockCharacter: Character = {
     id: '123',
     name: 'Aragorn',
+    version: '2',
     level: 5,
     class: 'Ranger',
     subclass: 'Hunter',
@@ -208,10 +209,10 @@ describe('Export Utilities', () => {
       
       expect(filename).toBe('aragorn-2024-07-08.json');
       expect(blob).toBeInstanceOf(Blob);
-      expect(blob.type).toBe('application/json;charset=utf-8');
+      expect((blob as unknown as MockBlob).type).toBe('application/json;charset=utf-8');
 
       // Check blob content
-      const text = await blob.text();
+      const text = await (blob as unknown as MockBlob).text();
       const data = JSON.parse(text);
       
       expect(data).toHaveProperty('metadata');
@@ -240,7 +241,7 @@ describe('Export Utilities', () => {
       
       expect(filename).toBe('dnd-characters-2024-07-08.json');
       
-      const text = await blob.text();
+      const text = await (blob as unknown as MockBlob).text();
       const data = JSON.parse(text);
       
       expect(data).toHaveProperty('metadata');

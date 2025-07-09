@@ -1,5 +1,5 @@
 import { Character } from '@/types/character';
-import { characterSchemaV2 } from '@/schemas/characterSchemaV2';
+import { CharacterSchemaV2 } from '@/schemas/characterSchemaV2';
 import { 
   CharacterExport, 
   BatchExport, 
@@ -170,7 +170,7 @@ export function validateCharacter(character: unknown): ImportResult<Character> {
   const errors: ImportError[] = [];
 
   try {
-    const result = characterSchemaV2.safeParse(character);
+    const result = CharacterSchemaV2.safeParse(character);
     
     if (!result.success) {
       result.error.errors.forEach(err => {
