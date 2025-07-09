@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CoreStatsPage } from './pages/CoreStatsPage';
@@ -7,10 +8,12 @@ import { hasSpellcasting } from '@/utils/spellcasting';
 import { cn } from '@/utils/cn';
 import { Edit2, Save, X, Undo2, Redo2 } from 'lucide-react';
 import { useEditMode, useEditActions, useEditHistory, useEditableCharacter, useAutosave } from '@/stores/editHooks';
+import { useSwipeableNavigation } from '@/hooks/useSwipeGesture';
 import { Button } from '@/components/ui/button';
 
 export function CharacterSheet() {
   const { id } = useParams();
+  const [activeTab, setActiveTab] = useState('core');
   
   // Edit mode hooks
   const { isEditMode, isDirty, enableEditMode, disableEditMode } = useEditMode();
@@ -22,6 +25,19 @@ export function CharacterSheet() {
   
   // Enable autosave
   useAutosave(isEditMode, 2000);
+  
+  // Set up swipe navigation (must be before conditional returns)
+  const tabs = character && hasSpellcasting(character) 
+    ? ['core', 'details', 'spellcasting'] 
+    : ['core', 'details'];
+  const currentTabIndex = tabs.indexOf(activeTab);
+  
+  // Add swipe support for tab navigation
+  useSwipeableNavigation(
+    currentTabIndex,
+    tabs.length,
+    (index) => setActiveTab(tabs[index])
+  );
 
   if (!character) {
     return <Navigate to="/characters" replace />;
@@ -45,15 +61,15 @@ export function CharacterSheet() {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-7xl print:p-0">
+    <div className="container mx-auto p-2 sm:p-4 max-w-7xl print:p-0">
       {/* Edit Mode Toolbar */}
-      <div className="flex items-center justify-between mb-4 print:hidden">
-        <h1 className="text-2xl font-bold">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 print:hidden">
+        <h1 className="text-xl md:text-2xl font-bold">
           {character.name}
-          {isDirty && <span className="text-sm text-orange-500 ml-2">(unsaved changes)</span>}
+          {isDirty && <span className="text-xs md:text-sm text-orange-500 ml-2">(unsaved changes)</span>}
         </h1>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 justify-end">
           {isEditMode && (
             <>
               <Button
@@ -62,6 +78,7 @@ export function CharacterSheet() {
                 onClick={undo}
                 disabled={!canUndo}
                 title="Undo (Ctrl+Z)"
+                className="touch-target-sm"
               >
                 <Undo2 className="w-4 h-4" />
               </Button>
@@ -71,10 +88,11 @@ export function CharacterSheet() {
                 onClick={redo}
                 disabled={!canRedo}
                 title="Redo (Ctrl+Y)"
+                className="touch-target-sm"
               >
                 <Redo2 className="w-4 h-4" />
               </Button>
-              <div className="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1" />
+              <div className="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1 hidden sm:block" />
               <Button
                 variant="default"
                 size="sm"
@@ -98,19 +116,30 @@ export function CharacterSheet() {
             variant={isEditMode ? "ghost" : "default"}
             size="sm"
             onClick={handleEditToggle}
+            className="touch-target"
           >
-            <Edit2 className="w-4 h-4 mr-2" />
-            {isEditMode ? 'Exit Edit Mode' : 'Edit'}
+            <Edit2 className="w-4 h-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">{isEditMode ? 'Exit Edit Mode' : 'Edit'}</span>
+            <span className="sm:hidden">{isEditMode ? 'Exit' : 'Edit'}</span>
           </Button>
         </div>
       </div>
       
-      <Tabs defaultValue="core" className="space-y-4">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList className="grid w-full grid-cols-2 lg:w-auto lg:inline-grid lg:grid-cols-3 print:hidden">
-          <TabsTrigger value="core">Core Stats</TabsTrigger>
-          <TabsTrigger value="details">Details & Equipment</TabsTrigger>
+          <TabsTrigger value="core" className="touch-target text-xs sm:text-sm">
+            <span className="hidden sm:inline">Core Stats</span>
+            <span className="sm:hidden">Stats</span>
+          </TabsTrigger>
+          <TabsTrigger value="details" className="touch-target text-xs sm:text-sm">
+            <span className="hidden sm:inline">Details & Equipment</span>
+            <span className="sm:hidden">Details</span>
+          </TabsTrigger>
           {showSpellcasting && (
-            <TabsTrigger value="spellcasting">Spellcasting</TabsTrigger>
+            <TabsTrigger value="spellcasting" className="touch-target text-xs sm:text-sm">
+              <span className="hidden sm:inline">Spellcasting</span>
+              <span className="sm:hidden">Spells</span>
+            </TabsTrigger>
           )}
         </TabsList>
 

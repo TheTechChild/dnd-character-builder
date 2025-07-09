@@ -5,6 +5,7 @@ import { WizardFormData, WIZARD_STEPS, STEP_LABELS, INITIAL_FORM_DATA, WizardSte
 import { useQuickActions } from '@/stores';
 import { calculateAbilityModifier } from '@/utils/calculations';
 import { generateRandomCharacter } from '@/utils/randomCharacter';
+import { useSwipeableNavigation } from '@/hooks/useSwipeGesture';
 import { v4 as uuidv4 } from 'uuid';
 import BasicInfoStep from './steps/BasicInfoStep';
 import AbilityScoresStep from './steps/AbilityScoresStep';
@@ -159,25 +160,33 @@ export default function CharacterWizard() {
     setCurrentStep('review');
   };
 
+  // Add swipe gesture support for mobile navigation
+  useSwipeableNavigation(
+    currentStepIndex,
+    WIZARD_STEPS.length,
+    (index) => setCurrentStep(WIZARD_STEPS[index]),
+    { preventScrollOnSwipe: true }
+  );
+
   const StepComponent = STEP_COMPONENTS[currentStep];
 
   return (
     <FormProvider {...methods}>
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="mb-8 flex justify-between items-start">
+      <div className="container mx-auto px-2 sm:px-4 py-4 md:py-8 max-w-4xl">
+        <div className="mb-6 md:mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Create New Character</h1>
-            <p className="text-gray-600">Follow the steps below to create your D&D character</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 md:mb-2">Create New Character</h1>
+            <p className="text-sm md:text-base text-gray-600">Follow the steps below to create your D&D character</p>
           </div>
           <button
             type="button"
             onClick={handleRandomGenerate}
-            className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 flex items-center space-x-2"
+            className="w-full sm:w-auto px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 flex items-center justify-center sm:justify-start space-x-2 touch-target"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
-            <span>Random Character</span>
+            <span className="text-sm md:text-base">Random Character</span>
           </button>
         </div>
 
@@ -187,7 +196,7 @@ export default function CharacterWizard() {
           labels={STEP_LABELS}
         />
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-4 md:mb-6">
           <StepComponent
             data={formData}
             onUpdate={handleUpdate}

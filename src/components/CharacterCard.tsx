@@ -41,27 +41,28 @@ export const CharacterCard: React.FC<CharacterCardProps> = React.memo(({
           checked={isSelected}
           onCheckedChange={onSelect}
           onClick={(e) => e.stopPropagation()}
+          className="touch-target-sm"
         />
       </div>
 
       <Link to={`/characters/${character.id}`} className="block">
-        <div className="p-6">
+        <div className="p-4 md:p-6">
           {/* Character Portrait Placeholder */}
-          <div className="w-full h-32 bg-gray-200 rounded-md mb-4 flex items-center justify-center">
-            <div className="text-4xl font-bold text-gray-400">
+          <div className="w-full h-24 sm:h-28 md:h-32 bg-gray-200 rounded-md mb-3 md:mb-4 flex items-center justify-center">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-400">
               {name?.charAt(0)?.toUpperCase() || '?'}
             </div>
           </div>
 
           {/* Character Info */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-bold truncate">{name || 'Unnamed Character'}</h3>
-            <p className="text-sm text-gray-600">
+          <div className="space-y-1 md:space-y-2">
+            <h3 className="text-base md:text-lg font-bold truncate">{name || 'Unnamed Character'}</h3>
+            <p className="text-xs md:text-sm text-gray-600">
               Level {level || 1} {race || 'Unknown'} {characterClass || 'Adventurer'}
             </p>
             
             {/* Stats */}
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between text-xs md:text-sm">
               <span className="font-medium">HP: {currentHP}/{maxHP}</span>
               <span className="font-medium">AC: {ac}</span>
             </div>
@@ -73,14 +74,14 @@ export const CharacterCard: React.FC<CharacterCardProps> = React.memo(({
           </div>
 
           {/* Actions */}
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex justify-between items-center mt-3 md:mt-4">
             <button
               onClick={(e: React.MouseEvent) => {
                 e.preventDefault();
                 e.stopPropagation();
                 // TODO: Implement favorite functionality
               }}
-              className="text-gray-400 hover:text-yellow-500 transition-colors"
+              className="text-gray-400 hover:text-yellow-500 transition-colors touch-target-sm p-2"
             >
               <Star className="w-4 h-4" />
             </button>
@@ -92,7 +93,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = React.memo(({
                   e.stopPropagation();
                   setShowActions(!showActions);
                 }}
-                className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+                className="text-gray-400 hover:text-gray-600 transition-colors touch-target-sm p-2"
               >
                 <MoreVertical className="w-4 h-4" />
               </button>

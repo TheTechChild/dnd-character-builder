@@ -96,15 +96,15 @@ export function SyncStatus() {
             onClick={handleManualSync}
             disabled={!syncStatus.isOnline || syncStatus.pendingCount === 0 || isSyncing}
             className={`
-              flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-colors
+              flex items-center gap-1 md:gap-2 px-2 md:px-3 py-1.5 text-xs md:text-sm rounded-md transition-colors touch-target-sm
               ${syncStatus.pendingCount > 0 && syncStatus.isOnline && !isSyncing
-                ? 'hover:bg-gray-100 cursor-pointer'
+                ? 'hover:bg-white/10 cursor-pointer'
                 : 'cursor-default'
               }
             `}
           >
             {getStatusIcon()}
-            <span className="font-medium">{getStatusText()}</span>
+            <span className="font-medium hidden sm:inline">{getStatusText()}</span>
           </button>
         </TooltipTrigger>
         <TooltipContent>
