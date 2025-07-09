@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/ErrorBoundary'
 import Layout from './components/Layout'
+import { PWAManager } from './components/PWA/PWAManager'
 
 const Home = lazy(() => import('./pages/Home'))
 const CharacterList = lazy(() => import('./pages/CharacterList'))
@@ -20,6 +21,7 @@ const LoadingSpinner = () => (
 function App() {
   return (
     <ErrorBoundary>
+      <PWAManager />
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           <Route path="/" element={<Layout />}>

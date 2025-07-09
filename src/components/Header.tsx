@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Navigation from './Navigation'
+import { SyncStatus } from './PWA/SyncStatus'
 
 function Header() {
   return (
@@ -9,7 +10,10 @@ function Header() {
           <Link to="/" className="text-xl font-bold">
             D&D Character Builder
           </Link>
-          <Navigation />
+          <div className="flex items-center gap-4">
+            <SyncStatus />
+            <Navigation />
+          </div>
         </div>
       </div>
     </header>

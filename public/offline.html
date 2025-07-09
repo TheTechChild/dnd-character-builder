@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Character Builder - Offline</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #1f2937;
+            color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+        }
+        .icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            opacity: 0.5;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #f3f4f6;
+        }
+        p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #9ca3af;
+        }
+        .features {
+            text-align: left;
+            background-color: #374151;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .features h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #f3f4f6;
+        }
+        .features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .features li {
+            padding: 0.5rem 0;
+            color: #d1d5db;
+        }
+        .features li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            display: inline-block;
+            width: 1.5rem;
+        }
+        .retry-button {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+        .retry-button:hover {
+            background-color: #4338ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="icon" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="512" height="512" rx="64" fill="#4f46e5"/>
+            <g transform="translate(256, 256)">
+                <path d="M 0,-150 L 127.017,-82.5 L 127.017,82.5 L 0,150 L -127.017,82.5 L -127.017,-82.5 Z" 
+                      fill="#ffffff" 
+                      stroke="#e0e7ff" 
+                      stroke-width="4"/>
+                <path d="M 0,-150 L 0,0 M 127.017,-82.5 L 0,0 M 127.017,82.5 L 0,0 M 0,150 L 0,0 M -127.017,82.5 L 0,0 M -127.017,-82.5 L 0,0"
+                      stroke="#e0e7ff" 
+                      stroke-width="2" 
+                      fill="none"/>
+                <text x="0" y="10" 
+                      font-family="Arial, sans-serif" 
+                      font-size="72" 
+                      font-weight="bold" 
+                      text-anchor="middle" 
+                      fill="#4f46e5">20</text>
+            </g>
+        </svg>
+        
+        <h1>You're Offline</h1>
+        <p>Don't worry! D&D Character Builder works offline. You can still access all your characters and most features.</p>
+        
+        <button class="retry-button" onclick="window.location.reload()">
+            Try Again
+        </button>
+        
+        <div class="features">
+            <h2>Available Offline:</h2>
+            <ul>
+                <li>View and edit your characters</li>
+                <li>Create new characters</li>
+                <li>Use the dice roller</li>
+                <li>Access cached reference content</li>
+                <li>Export character data</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Check if we're back online
+        window.addEventListener('online', function() {
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
