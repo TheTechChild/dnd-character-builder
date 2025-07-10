@@ -3,6 +3,10 @@ import { Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/ErrorBoundary'
 import Layout from './components/Layout'
 import { PWAManager } from './components/PWA/PWAManager'
+import { LoadingSpinner } from './components/ui/loading'
+import { ToastContainer } from './components/ui/toast'
+import { PageTransition } from './components/ui/loading'
+import { NotFoundPage } from './components/ui/error-states'
 
 const Home = lazy(() => import('./pages/Home'))
 const CharacterList = lazy(() => import('./pages/CharacterList'))
@@ -12,9 +16,9 @@ const EditCharacter = lazy(() => import('./pages/EditCharacter'))
 const Settings = lazy(() => import('./pages/Settings'))
 const Reference = lazy(() => import('./pages/Reference'))
 
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+const LoadingPage = () => (
+  <div className="flex items-center justify-center min-h-screen bg-gradient-mystic">
+    <LoadingSpinner size="xl" variant="particles" />
   </div>
 )
 
@@ -22,23 +26,65 @@ function App() {
   return (
     <ErrorBoundary>
       <PWAManager />
-      <Suspense fallback={<LoadingSpinner />}>
+      <ToastContainer />
+      <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="characters" element={<CharacterList />} />
+            <Route index element={
+              <PageTransition>
+                <Home />
+              </PageTransition>
+            } />
+            <Route path="characters" element={
+              <PageTransition>
+                <CharacterList />
+              </PageTransition>
+            } />
             <Route path="characters">
-              <Route path="new" element={<CreateCharacter />} />
-              <Route path=":id" element={<ViewCharacter />} />
-              <Route path=":id/edit" element={<EditCharacter />} />
+              <Route path="new" element={
+                <PageTransition>
+                  <CreateCharacter />
+                </PageTransition>
+              } />
+              <Route path=":id" element={
+                <PageTransition>
+                  <ViewCharacter />
+                </PageTransition>
+              } />
+              <Route path=":id/edit" element={
+                <PageTransition>
+                  <EditCharacter />
+                </PageTransition>
+              } />
             </Route>
             <Route path="character">
-              <Route path="new" element={<CreateCharacter />} />
-              <Route path=":id" element={<ViewCharacter />} />
-              <Route path=":id/edit" element={<EditCharacter />} />
+              <Route path="new" element={
+                <PageTransition>
+                  <CreateCharacter />
+                </PageTransition>
+              } />
+              <Route path=":id" element={
+                <PageTransition>
+                  <ViewCharacter />
+                </PageTransition>
+              } />
+              <Route path=":id/edit" element={
+                <PageTransition>
+                  <EditCharacter />
+                </PageTransition>
+              } />
             </Route>
-            <Route path="settings" element={<Settings />} />
-            <Route path="reference" element={<Reference />} />
+            <Route path="settings" element={
+              <PageTransition>
+                <Settings />
+              </PageTransition>
+            } />
+            <Route path="reference" element={
+              <PageTransition>
+                <Reference />
+              </PageTransition>
+            } />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Suspense>

@@ -95,10 +95,14 @@ interface UIStore {
 
 interface Toast {
   id: string;
-  type: 'success' | 'error' | 'warning' | 'info';
   title: string;
-  message?: string;
+  description?: string;
+  variant?: 'default' | 'success' | 'error' | 'warning' | 'info';
   duration?: number;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
 }
 
 const initialState = {
