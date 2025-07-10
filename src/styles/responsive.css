@@ -1,0 +1,276 @@
+/* Responsive utilities for D&D Character Builder */
+
+/* Touch target enforcement */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  @apply relative;
+}
+
+.touch-target::before {
+  content: '';
+  @apply absolute inset-0 -m-1;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Responsive touch targets with larger sizes on mobile */
+@media (max-width: 640px) {
+  .touch-target-responsive {
+    min-width: 48px;
+    min-height: 48px;
+  }
+  
+  .touch-target-responsive::before {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+/* Desktop-only hover effects */
+@media (hover: hover) and (pointer: fine) {
+  .hover-effect {
+    @apply transition-all duration-200;
+  }
+  
+  .hover-effect:hover {
+    @apply scale-105;
+  }
+  
+  .hover-glow:hover {
+    @apply shadow-lg shadow-primary/25;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-0.5;
+  }
+  
+  .hover-rotate:hover {
+    @apply rotate-2;
+  }
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .touch-feedback {
+    @apply transition-all duration-100;
+  }
+  
+  .touch-feedback:active {
+    @apply scale-95 opacity-90;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .hover-effect,
+  .touch-feedback {
+    transition: none !important;
+  }
+  
+  /* Remove parallax effects */
+  .parallax {
+    transform: none !important;
+  }
+  
+  /* Simplify loading animations */
+  .animate-pulse {
+    animation: none !important;
+    opacity: 0.7;
+  }
+  
+  .animate-spin {
+    animation: simple-spin 1s linear infinite !important;
+  }
+  
+  @keyframes simple-spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Remove decorative animations */
+  .animate-float,
+  .animate-shimmer,
+  .animate-glow-pulse {
+    animation: none !important;
+  }
+  
+  /* Instant state changes */
+  .will-transform {
+    will-change: auto !important;
+  }
+}
+
+/* Responsive spacing utilities */
+.spacing-mobile {
+  @apply p-4 space-y-4;
+}
+
+.spacing-tablet {
+  @apply sm:p-6 sm:space-y-6;
+}
+
+.spacing-desktop {
+  @apply lg:p-8 lg:space-y-8;
+}
+
+/* Responsive text utilities */
+.text-responsive-sm {
+  @apply text-sm sm:text-base;
+}
+
+.text-responsive-base {
+  @apply text-base sm:text-lg;
+}
+
+.text-responsive-lg {
+  @apply text-lg sm:text-xl lg:text-2xl;
+}
+
+.text-responsive-xl {
+  @apply text-xl sm:text-2xl lg:text-3xl;
+}
+
+/* Mobile-optimized layouts */
+.mobile-card {
+  @apply rounded-lg border bg-card p-4;
+}
+
+@media (min-width: 640px) {
+  .mobile-card {
+    @apply p-6;
+  }
+}
+
+/* Simplified decorations on mobile */
+.decoration-responsive {
+  @apply border shadow-sm;
+}
+
+@media (min-width: 768px) {
+  .decoration-responsive {
+    @apply shadow-md;
+  }
+}
+
+@media (min-width: 1024px) {
+  .decoration-responsive {
+    @apply shadow-lg;
+  }
+}
+
+/* Hide complex decorations on small screens */
+.decoration-desktop-only {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .decoration-desktop-only {
+    display: block;
+  }
+}
+
+/* Responsive grid utilities */
+.grid-responsive {
+  @apply grid gap-4 grid-cols-1;
+}
+
+@media (min-width: 640px) {
+  .grid-responsive {
+    @apply grid-cols-2 gap-6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    @apply grid-cols-3 gap-8;
+  }
+}
+
+/* Tablet-specific layouts */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-two-column {
+    @apply grid grid-cols-2 gap-6;
+  }
+  
+  .tablet-sidebar {
+    @apply flex gap-6;
+  }
+  
+  .tablet-sidebar > aside {
+    @apply w-1/3;
+  }
+  
+  .tablet-sidebar > main {
+    @apply flex-1;
+  }
+}
+
+/* Landscape optimizations */
+@media (orientation: landscape) and (max-height: 600px) {
+  .landscape-compact {
+    @apply py-2;
+  }
+  
+  .landscape-hide {
+    @apply hidden;
+  }
+}
+
+/* Mobile gesture hints */
+.swipe-hint {
+  position: relative;
+}
+
+.swipe-hint::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background-color: currentColor;
+  opacity: 0.3;
+  border-radius: 2px;
+}
+
+/* Performance optimizations */
+.will-transform {
+  will-change: transform;
+}
+
+.will-opacity {
+  will-change: opacity;
+}
+
+/* Mobile loading states */
+.skeleton-mobile {
+  @apply animate-pulse bg-muted rounded;
+  min-height: 44px;
+}
+
+/* Responsive container */
+.container-responsive {
+  @apply px-4 mx-auto;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    @apply px-6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    @apply px-8;
+  }
+}

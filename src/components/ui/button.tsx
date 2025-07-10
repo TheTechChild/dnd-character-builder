@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center font-medium transition-all duration-300 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden',
+  'inline-flex items-center justify-center font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden touch-target-responsive transition-all duration-300',
   {
     variants: {
       variant: {
@@ -12,15 +12,18 @@ const buttonVariants = cva(
           'text-yellow-200 font-bold',
           'border-2 border-yellow-600/50',
           'shadow-lg shadow-red-900/50',
-          'hover:from-red-700 hover:to-red-800',
-          'hover:border-yellow-500',
-          'hover:shadow-xl hover:shadow-red-800/60',
-          'hover:text-yellow-100',
-          'hover:scale-105',
+          // Desktop hover effects
+          'hover:hover:from-red-700 hover:hover:to-red-800',
+          'hover:hover:border-yellow-500',
+          'hover:hover:shadow-xl hover:hover:shadow-red-800/60',
+          'hover:hover:text-yellow-100',
+          'hover:hover:scale-105',
+          // Touch feedback
           'active:scale-95',
           'active:shadow-inner',
+          'touch-feedback',
           'focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900',
-          'after:content-[""] after:absolute after:inset-0 after:bg-gradient-to-t after:from-transparent after:to-white/10 after:opacity-0 hover:after:opacity-100 after:transition-opacity',
+          'after:content-[""] after:absolute after:inset-0 after:bg-gradient-to-t after:from-transparent after:to-white/10 after:opacity-0 hover:hover:after:opacity-100 after:transition-opacity',
         ].join(' '),
         
         secondary: [
@@ -28,13 +31,16 @@ const buttonVariants = cva(
           'text-purple-200',
           'border-2 border-purple-400/30',
           'shadow-lg shadow-purple-900/50',
-          'hover:from-purple-700 hover:to-purple-800',
-          'hover:border-purple-300/50',
-          'hover:shadow-xl hover:shadow-purple-800/60',
-          'hover:text-purple-100',
-          'hover:scale-105',
+          // Desktop hover effects
+          'hover:hover:from-purple-700 hover:hover:to-purple-800',
+          'hover:hover:border-purple-300/50',
+          'hover:hover:shadow-xl hover:hover:shadow-purple-800/60',
+          'hover:hover:text-purple-100',
+          'hover:hover:scale-105',
+          // Touch feedback
           'active:scale-95',
           'active:shadow-inner',
+          'touch-feedback',
           'focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900',
         ].join(' '),
         
@@ -42,11 +48,14 @@ const buttonVariants = cva(
           'bg-transparent',
           'text-gray-300',
           'border border-transparent',
-          'hover:bg-white/5',
-          'hover:border-white/20',
-          'hover:text-white',
-          'hover:shadow-lg hover:shadow-white/10',
+          // Desktop hover effects
+          'hover:hover:bg-white/5',
+          'hover:hover:border-white/20',
+          'hover:hover:text-white',
+          'hover:hover:shadow-lg hover:hover:shadow-white/10',
+          // Touch feedback
           'active:bg-white/10',
+          'touch-feedback',
           'focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900',
         ].join(' '),
         
@@ -55,12 +64,15 @@ const buttonVariants = cva(
           'text-red-100',
           'border-2 border-red-400/50',
           'shadow-lg shadow-red-900/50',
-          'hover:from-red-500 hover:to-red-700',
-          'hover:border-red-300',
-          'hover:shadow-xl hover:shadow-red-800/60',
-          'hover:animate-pulse',
+          // Desktop hover effects
+          'hover:hover:from-red-500 hover:hover:to-red-700',
+          'hover:hover:border-red-300',
+          'hover:hover:shadow-xl hover:hover:shadow-red-800/60',
+          'hover:hover:animate-pulse',
+          // Touch feedback
           'active:scale-95',
           'active:shadow-inner',
+          'touch-feedback',
           'focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900',
         ].join(' '),
         
@@ -69,20 +81,23 @@ const buttonVariants = cva(
           'text-emerald-100',
           'border-2 border-emerald-400/40',
           'shadow-lg shadow-emerald-900/50',
-          'hover:from-emerald-600 hover:to-emerald-700',
-          'hover:border-emerald-300/60',
-          'hover:shadow-xl hover:shadow-emerald-800/60',
-          'hover:scale-105',
+          // Desktop hover effects
+          'hover:hover:from-emerald-600 hover:hover:to-emerald-700',
+          'hover:hover:border-emerald-300/60',
+          'hover:hover:shadow-xl hover:hover:shadow-emerald-800/60',
+          'hover:hover:scale-105',
+          // Touch feedback
           'active:scale-95',
           'active:shadow-inner',
+          'touch-feedback',
           'focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900',
           'before:content-[""] before:absolute before:inset-0 before:bg-[url("data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M20 10 Q25 15 20 20 Q15 15 20 10" fill="none" stroke="%2310b981" stroke-width="0.5" opacity="0.1"/%3E%3C/svg%3E")] before:opacity-30',
         ].join(' '),
       },
       size: {
-        small: 'h-9 px-3 text-sm rounded-md gap-1.5',
-        medium: 'h-11 px-5 text-base rounded-lg gap-2',
-        large: 'h-14 px-8 text-lg rounded-xl gap-2.5',
+        small: 'min-h-[44px] sm:h-9 px-4 sm:px-3 text-sm rounded-md gap-1.5',
+        medium: 'min-h-[48px] sm:h-11 px-5 text-base rounded-lg gap-2',
+        large: 'min-h-[56px] sm:h-14 px-6 sm:px-8 text-lg rounded-xl gap-2.5',
       },
     },
     defaultVariants: {

@@ -57,18 +57,20 @@ export const CharacterCard: React.FC<CharacterCardProps> = React.memo(({
     <Card 
       variant="elevated" 
       className={cn(
-        "group relative overflow-hidden transition-all duration-500",
+        "group relative overflow-hidden transition-all duration-300",
         "bg-gradient-to-br",
         classColors,
         "border-2",
-        "before:absolute before:inset-0 before:bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZmFudGFzeSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik01MCAxMGwyMCAzMGgtNDB6IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMC4yIiBvcGFjaXR5PSIwLjEiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuMiIgb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2ZhbnRhc3kpIi8+PC9zdmc+')] before:opacity-20 before:pointer-events-none"
+        "hover-effect",
+        "touch-feedback",
+        "lg:before:absolute lg:before:inset-0 lg:before:bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZmFudGFzeSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik01MCAxMGwyMCAzMGgtNDB6IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMC4yIiBvcGFjaXR5PSIwLjEiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuMiIgb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2ZhbnRhc3kpIi8+PC9zdmc+')] lg:before:opacity-20 lg:before:pointer-events-none"
       )}
     >
-      {/* Ornate Corner Decorations */}
-      <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-current opacity-30" />
-      <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-current opacity-30" />
-      <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-current opacity-30" />
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-current opacity-30" />
+      {/* Ornate Corner Decorations - Desktop only */}
+      <div className="decoration-desktop-only absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-current opacity-30" />
+      <div className="decoration-desktop-only absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-current opacity-30" />
+      <div className="decoration-desktop-only absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-current opacity-30" />
+      <div className="decoration-desktop-only absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-current opacity-30" />
       
       {/* Selection Checkbox */}
       <div className="absolute top-3 left-3 z-10">
@@ -136,7 +138,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = React.memo(({
               }}
               className="text-gray-400 hover:text-yellow-500 transition-colors touch-target-sm p-2"
             >
-              <Star className="w-4 h-4" />
+              <Star className="w-4 h-4 md:w-5 md:h-5" />
             </button>
 
             <div className="relative">
@@ -148,7 +150,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = React.memo(({
                 }}
                 className="text-gray-400 hover:text-gray-600 transition-colors touch-target-sm p-2"
               >
-                <MoreVertical className="w-4 h-4" />
+                <MoreVertical className="w-4 h-4 md:w-5 md:h-5" />
               </button>
 
               {/* Dropdown Menu */}
@@ -195,8 +197,8 @@ export const CharacterCard: React.FC<CharacterCardProps> = React.memo(({
         />
       )}
       
-      {/* Hover Glow Effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+      {/* Hover Glow Effect - Desktop only */}
+      <div className="absolute inset-0 opacity-0 hover:hover:group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-t from-amber-500/10 via-transparent to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
       </div>

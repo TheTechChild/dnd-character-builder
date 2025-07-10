@@ -3,12 +3,12 @@ import { cn } from '@/utils/cn'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 const inputVariants = cva(
-  "peer w-full transition-all duration-300 text-sm",
+  "peer w-full transition-all duration-300 text-sm touch-target-responsive",
   {
     variants: {
       variant: {
         default: [
-          "h-12 px-4 pt-5 pb-1",
+          "min-h-[48px] sm:h-12 px-4 pt-5 pb-1",
           "bg-gradient-to-b from-gray-900/50 to-gray-950/50 dark:from-gray-950/70 dark:to-black/70",
           "border-2 border-gray-700/50 dark:border-gray-800/50",
           "rounded-lg",
@@ -18,26 +18,29 @@ const inputVariants = cva(
           "focus:bg-gradient-to-b focus:from-gray-800/50 focus:to-gray-900/50",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",
-          "[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          "[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+          "touch-feedback"
         ],
         parchment: [
-          "h-12 px-4 pt-5 pb-1",
+          "min-h-[48px] sm:h-12 px-4 pt-5 pb-1",
           "bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20",
           "border-2 border-amber-200/50 dark:border-amber-900/50",
           "rounded-md",
           "text-gray-900 dark:text-amber-100 placeholder:text-transparent",
           "shadow-sm",
           "focus:border-amber-500 focus:shadow-[0_0_15px_rgba(251,191,36,0.2)]",
-          "disabled:cursor-not-allowed disabled:opacity-50"
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          "touch-feedback"
         ],
         minimal: [
-          "h-10 px-3 py-2",
+          "min-h-[44px] sm:h-10 px-3 py-2",
           "bg-transparent",
           "border-b-2 border-gray-700/50 dark:border-gray-800/50",
           "rounded-none",
           "text-white placeholder:text-muted-foreground",
           "focus:border-amber-500 focus:shadow-[0_2px_0_0_rgba(251,191,36,0.5)]",
-          "disabled:cursor-not-allowed disabled:opacity-50"
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          "touch-feedback"
         ]
       }
     },
