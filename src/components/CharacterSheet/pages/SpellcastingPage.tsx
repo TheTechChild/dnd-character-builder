@@ -8,12 +8,12 @@ interface SpellcastingPageProps {
   isEditMode?: boolean;
 }
 
-export function SpellcastingPage({ character }: SpellcastingPageProps) {
+export function SpellcastingPage({ character, isEditMode = false }: SpellcastingPageProps) {
   return (
     <div className="space-y-4 print:space-y-2">
       <SpellcastingInfo character={character} />
       
-      <SpellSlots character={character} />
+      <SpellSlots character={character} isEditMode={isEditMode} />
       
       <SpellList character={character} />
     </div>
