@@ -1211,3 +1211,73 @@ button:active .ripple {
 button:focus-visible {
   animation: focusPulse 2s ease-in-out infinite;
 }
+
+/* Texture Overlays */
+.texture-paper {
+  position: relative;
+}
+
+.texture-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJwYXBlciI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuMDQiIG51bU9jdGF2ZXM9IjUiIHJlc3VsdD0ibm9pc2UiIHNlZWQ9IjIiLz48ZmVEaWZmdXNlTGlnaHRpbmcgaW49Im5vaXNlIiBsaWdodGluZy1jb2xvcj0id2hpdGUiIHN1cmZhY2VTY2FsZT0iMSI+PGZlRGlzdGFudExpZ2h0IGF6aW11dGg9IjQ1IiBlbGV2YXRpb249IjYwIi8+PC9mZURpZmZ1c2VMaWdodGluZz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI3BhcGVyKSIgb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==');
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.texture-leather {
+  position: relative;
+}
+
+.texture-leather::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ibGVhdGhlciIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSI4IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjQiIHN0cm9rZS13aWR0aD0iMC4zIiBvcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI1IiBjeT0iNSIgcj0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY0IiBzdHJva2Utd2lkdGg9IjAuMiIgb3BhY2l0eT0iMC4xNSIvPjxjaXJjbGUgY3g9IjE1IiBjeT0iMTUiIHI9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY2NCIgc3Ryb2tlLXdpZHRoPSIwLjI1IiBvcGFjaXR5PSIwLjE4Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2xlYXRoZXIpIi8+PC9zdmc+');
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.texture-stone {
+  position: relative;
+}
+
+.texture-stone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ic3RvbmUiIHg9IjAiIHk9IjAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBvbHlnb24gcG9pbnRzPSIyNSwwIDUwLDI1IDI1LDUwIDAsMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIwLjMiIG9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjI1IiBjeT0iMjUiIHI9IjEwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMC4yIiBvcGFjaXR5PSIwLjE1Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3N0b25lKSIvPjwvc3ZnPg==');
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Card Hover Effects */
+@keyframes magicalGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.card-magical-glow {
+  position: relative;
+}
+
+.card-magical-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, var(--color-primary-crimson), var(--color-gold-bright), var(--color-mystic-bright));
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+  z-index: -1;
+  animation: magicalGlow 2s ease-in-out infinite;
+}
+
+.card-magical-glow:hover::after {
+  opacity: 1;
+}
