@@ -32,10 +32,10 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
           </Dialog.Description>
 
           <div className="mt-6 flex justify-end gap-3">
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="ghost" onClick={onClose}>
               Cancel
             </Button>
-            <Button variant="destructive" onClick={onConfirm}>
+            <Button variant="danger" onClick={onConfirm}>
               Delete Character
             </Button>
           </div>

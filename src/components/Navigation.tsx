@@ -29,7 +29,7 @@ function Navigation() {
       </NavLink>
       <Button
         variant="ghost"
-        size="sm"
+        size="small"
         onClick={() => setShowFloatingWidget(!showFloatingWidget)}
         className="text-indigo-100 hover:bg-indigo-500 hover:text-white"
         title={showFloatingWidget ? "Hide dice roller" : "Show dice roller"}

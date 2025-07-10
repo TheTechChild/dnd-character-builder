@@ -43,7 +43,7 @@ export function QuickStats({ character }: QuickStatsProps) {
         </div>
         <Button
           variant="ghost"
-          size="sm"
+          size="small"
           className={cn(
             "absolute -top-2 -right-2 h-6 w-6 p-0",
             "opacity-0 group-hover:opacity-100 transition-opacity",

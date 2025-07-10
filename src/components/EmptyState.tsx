@@ -16,7 +16,7 @@ export const EmptyState: React.FC = () => {
       </p>
       
       <Link to="/characters/new">
-        <Button size="lg">
+        <Button size="large">
           <Plus className="w-5 h-5 mr-2" />
           Create Your First Character
         </Button>

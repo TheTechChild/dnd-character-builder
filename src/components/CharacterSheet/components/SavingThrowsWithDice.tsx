@@ -77,7 +77,7 @@ export function SavingThrowsWithDice({ character }: SavingThrowsWithDiceProps) {
               </span>
               <Button
                 variant="ghost"
-                size="sm"
+                size="small"
                 className={cn(
                   "h-6 w-6 p-0",
                   "opacity-0 group-hover:opacity-100 transition-opacity",

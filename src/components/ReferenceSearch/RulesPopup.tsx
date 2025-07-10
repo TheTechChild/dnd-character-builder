@@ -73,8 +73,8 @@ export function RulesPopup({ isOpen, onClose, rule }: RulesPopupProps) {
                     return (
                       <Button
                         key={ruleKey}
-                        variant="outline"
-                        size="sm"
+                        variant="ghost"
+                        size="small"
                         onClick={() => {
                           // In a real implementation, this would open the related rule
                           console.log('Open rule:', ruleKey);
@@ -115,12 +115,12 @@ export function RulesPopup({ isOpen, onClose, rule }: RulesPopupProps) {
 // Quick access button for rules
 interface RulesButtonProps {
   ruleKey: string;
-  variant?: 'default' | 'outline' | 'ghost';
-  size?: 'default' | 'sm' | 'lg';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'success';
+  size?: 'small' | 'medium' | 'large';
   className?: string;
 }
 
-export function RulesButton({ ruleKey, variant = 'ghost', size = 'sm', className }: RulesButtonProps) {
+export function RulesButton({ ruleKey, variant = 'ghost', size = 'small', className }: RulesButtonProps) {
   const rule = rulesDatabase[ruleKey];
   
   if (!rule) return null;

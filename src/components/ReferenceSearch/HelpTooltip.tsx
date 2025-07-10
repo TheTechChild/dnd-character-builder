@@ -28,7 +28,7 @@ export function HelpTooltip({
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            size="sm"
+            size="small"
             className={`h-auto p-0.5 hover:bg-transparent ${className}`}
           >
             <HelpCircle className={`text-gray-400 hover:text-gray-600 ${iconClassName}`} />

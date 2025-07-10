@@ -176,8 +176,8 @@ export function SearchModal({ isOpen, onClose, onSelect }: SearchModalProps) {
                 {recentSearches.map((search, index) => (
                   <Button
                     key={index}
-                    variant="outline"
-                    size="sm"
+                    variant="ghost"
+                    size="small"
                     onClick={() => setSearchQuery(search)}
                   >
                     {search}
@@ -224,7 +224,7 @@ export function SearchModal({ isOpen, onClose, onSelect }: SearchModalProps) {
                     </div>
                     <Button
                       variant="ghost"
-                      size="sm"
+                      size="small"
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleBookmark(item);

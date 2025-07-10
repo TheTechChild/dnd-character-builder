@@ -30,7 +30,7 @@ export function FloatingDiceWidget() {
                 <div className="flex items-center gap-1">
                   <Button
                     variant="ghost"
-                    size="sm"
+                    size="small"
                     className="h-6 w-6 p-0"
                     onClick={() => setShowHistory(!showHistory)}
                     title={showHistory ? "Show roller" : "Show history"}
@@ -39,7 +39,7 @@ export function FloatingDiceWidget() {
                   </Button>
                   <Button
                     variant="ghost"
-                    size="sm"
+                    size="small"
                     className="h-6 w-6 p-0"
                     onClick={() => setIsOpen(false)}
                     title="Minimize"
@@ -48,7 +48,7 @@ export function FloatingDiceWidget() {
                   </Button>
                   <Button
                     variant="ghost"
-                    size="sm"
+                    size="small"
                     className="h-6 w-6 p-0"
                     onClick={() => setShowFloatingWidget(false)}
                     title="Close widget"

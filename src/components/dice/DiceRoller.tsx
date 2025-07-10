@@ -137,7 +137,7 @@ export function DiceRoller({ className, onRoll }: DiceRollerProps) {
           onClick={handleRoll}
           disabled={isRolling || !notation.trim()}
           className="w-full"
-          size="lg"
+          size="large"
         >
           {isRolling ? (
             <motion.div
@@ -156,64 +156,64 @@ export function DiceRoller({ className, onRoll }: DiceRollerProps) {
           <Label>Quick Rolls</Label>
           <div className="grid grid-cols-4 gap-2">
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll('1d20', 'D20')}
               disabled={isRolling}
             >
               d20
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll('1d12', 'D12')}
               disabled={isRolling}
             >
               d12
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll('1d10', 'D10')}
               disabled={isRolling}
             >
               d10
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll('1d8', 'D8')}
               disabled={isRolling}
             >
               d8
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll('1d6', 'D6')}
               disabled={isRolling}
             >
               d6
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll('1d4', 'D4')}
               disabled={isRolling}
             >
               d4
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll('1d100', 'D100')}
               disabled={isRolling}
             >
               d100
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll(DICE_SHORTCUTS.abilityScores, 'Stats')}
               disabled={isRolling}
             >
@@ -223,8 +223,8 @@ export function DiceRoller({ className, onRoll }: DiceRollerProps) {
           
           <div className="grid grid-cols-2 gap-2">
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll(DICE_SHORTCUTS.advantage, 'Advantage')}
               disabled={isRolling}
               className="text-green-600"
@@ -232,8 +232,8 @@ export function DiceRoller({ className, onRoll }: DiceRollerProps) {
               Advantage
             </Button>
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="small"
               onClick={() => handleQuickRoll(DICE_SHORTCUTS.disadvantage, 'Disadvantage')}
               disabled={isRolling}
               className="text-red-600"

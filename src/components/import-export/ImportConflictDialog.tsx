@@ -107,7 +107,7 @@ export function ImportConflictDialog({
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={onCancel}>
+          <Button variant="ghost" onClick={onCancel}>
             Cancel
           </Button>
           <Button onClick={handleResolve}>

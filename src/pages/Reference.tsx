@@ -46,7 +46,7 @@ export default function Reference() {
         </p>
 
         <div className="flex gap-4 mb-6">
-          <Button onClick={() => setIsSearchOpen(true)} size="lg">
+          <Button onClick={() => setIsSearchOpen(true)} size="large">
             <Search className="mr-2 h-5 w-5" />
             Quick Search
           </Button>
@@ -231,7 +231,7 @@ export default function Reference() {
                     <p className="text-sm text-gray-600">
                       Last cleanup: {new Date(cacheStats.lastCleanup).toLocaleString()}
                     </p>
-                    <Button variant="destructive" onClick={handleClearCache}>
+                    <Button variant="danger" onClick={handleClearCache}>
                       Clear All Cache
                     </Button>
                   </div>
