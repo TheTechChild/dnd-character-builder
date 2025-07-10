@@ -139,6 +139,132 @@
     --tracking-wide: 0.025em;
     --tracking-wider: 0.05em;
     --tracking-widest: 0.1em;
+    
+    /* Design System Tokens */
+    
+    /* Spacing Scale - D&D themed (0.25rem = 1 foot) */
+    --spacing-0: 0;
+    --spacing-px: 1px;
+    --spacing-0-5: 0.125rem;
+    --spacing-1: 0.25rem;
+    --spacing-1-5: 0.375rem;
+    --spacing-2: 0.5rem;
+    --spacing-2-5: 0.625rem;
+    --spacing-3: 0.75rem;
+    --spacing-3-5: 0.875rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-7: 1.75rem;
+    --spacing-8: 2rem;
+    --spacing-9: 2.25rem;
+    --spacing-10: 2.5rem;
+    --spacing-11: 2.75rem;
+    --spacing-12: 3rem;
+    --spacing-14: 3.5rem;
+    --spacing-16: 4rem;
+    --spacing-20: 5rem;
+    --spacing-24: 6rem;
+    --spacing-28: 7rem;
+    --spacing-32: 8rem;
+    --spacing-36: 9rem;
+    --spacing-40: 10rem;
+    --spacing-44: 11rem;
+    --spacing-48: 12rem;
+    --spacing-52: 13rem;
+    --spacing-56: 14rem;
+    --spacing-60: 15rem;
+    --spacing-64: 16rem;
+    --spacing-72: 18rem;
+    --spacing-80: 20rem;
+    --spacing-96: 24rem;
+    
+    /* D&D specific spacing */
+    --spacing-foot: 0.25rem;
+    --spacing-square: 1.25rem;
+    --spacing-reach: 1.25rem;
+    --spacing-shortRange: 2.5rem;
+    --spacing-mediumRange: 5rem;
+    --spacing-longRange: 7.5rem;
+    
+    /* Border Radius */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-base: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Irregular borders for parchment */
+    --radius-irregular-topLeft: 0.5rem;
+    --radius-irregular-topRight: 0.375rem;
+    --radius-irregular-bottomRight: 0.625rem;
+    --radius-irregular-bottomLeft: 0.25rem;
+    --radius-parchment-topLeft: 0.75rem;
+    --radius-parchment-topRight: 0.5rem;
+    --radius-parchment-bottomRight: 1rem;
+    --radius-parchment-bottomLeft: 0.625rem;
+    
+    /* Shadow System */
+    --shadow-none: none;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    
+    /* Magical shadows */
+    --shadow-magical-gold: 0 4px 14px 0 rgba(255, 215, 0, 0.3), 0 2px 8px 0 rgba(255, 215, 0, 0.2);
+    --shadow-magical-mystic: 0 4px 14px 0 rgba(139, 92, 246, 0.3), 0 2px 8px 0 rgba(139, 92, 246, 0.2);
+    --shadow-magical-crimson: 0 4px 14px 0 rgba(220, 20, 60, 0.3), 0 2px 8px 0 rgba(220, 20, 60, 0.2);
+    --shadow-magical-emerald: 0 4px 14px 0 rgba(16, 185, 129, 0.3), 0 2px 8px 0 rgba(16, 185, 129, 0.2);
+    
+    /* Inset shadows */
+    --shadow-inset-sm: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-inset-base: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+    --shadow-inset-md: inset 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-inset-lg: inset 0 8px 12px -2px rgba(0, 0, 0, 0.5);
+    --shadow-inset-engraved: inset 0 2px 4px 0 rgba(0, 0, 0, 0.6), inset 0 -1px 2px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Glow shadows */
+    --shadow-glow-gold: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
+    --shadow-glow-mystic: 0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2);
+    --shadow-glow-crimson: 0 0 20px rgba(220, 20, 60, 0.4), 0 0 40px rgba(220, 20, 60, 0.2);
+    
+    /* Animation Timing Functions */
+    --timing-linear: linear;
+    --timing-ease: ease;
+    --timing-easeIn: ease-in;
+    --timing-easeOut: ease-out;
+    --timing-easeInOut: ease-in-out;
+    --timing-magical: cubic-bezier(0.4, 0, 0.2, 1);
+    --timing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --timing-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --timing-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+    
+    /* Animation Durations */
+    --duration-instant: 0ms;
+    --duration-fast: 150ms;
+    --duration-base: 300ms;
+    --duration-slow: 500ms;
+    --duration-slower: 700ms;
+    --duration-slowest: 1000ms;
+    
+    /* Z-index Scale */
+    --z-behind: -1;
+    --z-base: 0;
+    --z-dropdown: 10;
+    --z-sticky: 20;
+    --z-overlay: 30;
+    --z-modal: 40;
+    --z-popover: 50;
+    --z-tooltip: 60;
+    --z-notification: 70;
+    --z-max: 9999;
   }
   
   /* Ensure dark theme is default */
@@ -871,4 +997,174 @@
   .text-responsive-6xl {
     font-size: var(--text-6xl);
   }
+  
+  /* Design Token Utilities */
+  
+  /* Border Radius Utilities */
+  .rounded-irregular {
+    border-top-left-radius: var(--radius-irregular-topLeft);
+    border-top-right-radius: var(--radius-irregular-topRight);
+    border-bottom-right-radius: var(--radius-irregular-bottomRight);
+    border-bottom-left-radius: var(--radius-irregular-bottomLeft);
+  }
+  
+  .rounded-parchment {
+    border-top-left-radius: var(--radius-parchment-topLeft);
+    border-top-right-radius: var(--radius-parchment-topRight);
+    border-bottom-right-radius: var(--radius-parchment-bottomRight);
+    border-bottom-left-radius: var(--radius-parchment-bottomLeft);
+  }
+  
+  /* Ornate Border Utilities */
+  .border-ornate-simple {
+    box-shadow: var(--shadow-none);
+    box-shadow: 0 0 0 1px var(--color-border-default), 0 0 0 3px var(--color-bg-darkest), 0 0 0 4px var(--color-border-gold);
+  }
+  
+  .border-ornate-double {
+    box-shadow: 0 0 0 1px var(--color-border-gold), 0 0 0 4px var(--color-bg-darkest), 0 0 0 5px var(--color-border-gold);
+  }
+  
+  .border-ornate-triple {
+    box-shadow: 0 0 0 1px var(--color-border-gold), 0 0 0 3px var(--color-bg-darkest), 0 0 0 4px var(--color-border-default), 0 0 0 6px var(--color-bg-darkest), 0 0 0 7px var(--color-border-gold);
+  }
+  
+  /* Gradient Border Utilities */
+  .border-gradient-gold {
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--color-bg-dark), var(--color-bg-dark)), linear-gradient(135deg, var(--color-gold-bright), var(--color-gold-dark));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+  
+  .border-gradient-mystic {
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--color-bg-dark), var(--color-bg-dark)), linear-gradient(135deg, var(--color-mystic-bright), var(--color-mystic-deep));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+  
+  .border-gradient-crimson {
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--color-bg-dark), var(--color-bg-dark)), linear-gradient(135deg, var(--color-primary-crimson), var(--color-primary-dark-crimson));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+  
+  /* Shadow Utilities */
+  .shadow-magical-gold {
+    box-shadow: var(--shadow-magical-gold);
+  }
+  
+  .shadow-magical-mystic {
+    box-shadow: var(--shadow-magical-mystic);
+  }
+  
+  .shadow-magical-crimson {
+    box-shadow: var(--shadow-magical-crimson);
+  }
+  
+  .shadow-magical-emerald {
+    box-shadow: var(--shadow-magical-emerald);
+  }
+  
+  .shadow-engraved {
+    box-shadow: var(--shadow-inset-engraved);
+  }
+  
+  /* Animation Utilities */
+  .animate-glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 3s linear infinite;
+    background: linear-gradient(90deg, transparent 40%, var(--color-gold-bright) 50%, transparent 60%);
+    background-size: 200% 100%;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn var(--duration-base) var(--timing-magical);
+  }
+  
+  .animate-fade-out {
+    animation: fadeOut var(--duration-base) var(--timing-magical);
+  }
+  
+  .animate-page-turn {
+    animation: pageTurn var(--duration-slower) var(--timing-smooth);
+    transform-style: preserve-3d;
+  }
+  
+  /* Transition Utilities */
+  .transition-base {
+    transition-property: all;
+    transition-duration: var(--duration-base);
+    transition-timing-function: var(--timing-magical);
+  }
+  
+  .transition-fast {
+    transition-property: all;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--timing-magical);
+  }
+  
+  .transition-slow {
+    transition-property: all;
+    transition-duration: var(--duration-slow);
+    transition-timing-function: var(--timing-magical);
+  }
+  
+  .transition-bounce {
+    transition-property: all;
+    transition-duration: var(--duration-base);
+    transition-timing-function: var(--timing-bounce);
+  }
+}
+
+/* Keyframe Animations */
+@keyframes glowPulse {
+  0%, 100% { 
+    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+    opacity: 0.8;
+  }
+  50% { 
+    box-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pageTurn {
+  0% { 
+    transform: rotateY(0);
+    transform-origin: left center;
+  }
+  100% { 
+    transform: rotateY(-180deg);
+    transform-origin: left center;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
