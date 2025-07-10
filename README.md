@@ -32,7 +32,7 @@ A modern, responsive web application for creating and managing Dungeons & Dragon
 
 ### Prerequisites
 
-- Node.js 18+ and yarn
+- Node.js 20+ and yarn
 - Git
 
 ### Installation
