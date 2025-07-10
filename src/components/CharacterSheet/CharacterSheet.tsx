@@ -74,7 +74,7 @@ export function CharacterSheet() {
             <>
               <Button
                 variant="ghost"
-                size="sm"
+                size="small"
                 onClick={undo}
                 disabled={!canUndo}
                 title="Undo (Ctrl+Z)"
@@ -84,7 +84,7 @@ export function CharacterSheet() {
               </Button>
               <Button
                 variant="ghost"
-                size="sm"
+                size="small"
                 onClick={redo}
                 disabled={!canRedo}
                 title="Redo (Ctrl+Y)"
@@ -94,8 +94,8 @@ export function CharacterSheet() {
               </Button>
               <div className="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1 hidden sm:block" />
               <Button
-                variant="default"
-                size="sm"
+                variant="primary"
+                size="small"
                 onClick={handleSave}
                 disabled={!canSave}
               >
@@ -104,7 +104,7 @@ export function CharacterSheet() {
               </Button>
               <Button
                 variant="ghost"
-                size="sm"
+                size="small"
                 onClick={cancelChanges}
               >
                 <X className="w-4 h-4 mr-2" />
@@ -113,8 +113,8 @@ export function CharacterSheet() {
             </>
           )}
           <Button
-            variant={isEditMode ? "ghost" : "default"}
-            size="sm"
+            variant={isEditMode ? "ghost" : "primary"}
+            size="small"
             onClick={handleEditToggle}
             className="touch-target"
           >

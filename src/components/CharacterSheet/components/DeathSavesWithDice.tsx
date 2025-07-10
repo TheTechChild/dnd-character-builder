@@ -53,8 +53,8 @@ export function DeathSavesWithDice({ character }: DeathSavesWithDiceProps) {
       </h3>
       
       <Button
-        variant="outline"
-        size="sm"
+        variant="ghost"
+        size="small"
         className={cn(
           "absolute top-4 right-4",
           "print:hidden"

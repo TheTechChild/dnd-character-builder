@@ -121,7 +121,7 @@ const CharacterList: React.FC = () => {
           {/* Mobile Controls */}
           <div className="flex gap-2 md:hidden">
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() => setShowFilters(!showFilters)}
               className={`flex-1 touch-target ${showFilters ? 'bg-gray-100' : ''}`}
             >
@@ -137,16 +137,16 @@ const CharacterList: React.FC = () => {
             {/* View Mode Toggle Mobile */}
             <div className="flex border rounded-md">
               <Button
-                variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                size="sm"
+                variant={viewMode === 'grid' ? 'primary' : 'ghost'}
+                size="small"
                 onClick={() => setViewMode('grid')}
                 className="rounded-r-none touch-target-sm"
               >
                 <Grid3X3 className="w-4 h-4" />
               </Button>
               <Button
-                variant={viewMode === 'list' ? 'default' : 'ghost'}
-                size="sm"
+                variant={viewMode === 'list' ? 'primary' : 'ghost'}
+                size="small"
                 onClick={() => setViewMode('list')}
                 className="rounded-l-none touch-target-sm"
               >
@@ -159,7 +159,7 @@ const CharacterList: React.FC = () => {
           <div className="hidden md:flex items-center gap-4">
             {/* Filter Toggle */}
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() => setShowFilters(!showFilters)}
               className={showFilters ? 'bg-gray-100' : ''}
             >
@@ -193,7 +193,7 @@ const CharacterList: React.FC = () => {
 
             {/* Sort Order */}
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
               className="px-3"
             >
@@ -203,16 +203,16 @@ const CharacterList: React.FC = () => {
             {/* View Mode Toggle Desktop */}
             <div className="flex border rounded-md">
               <Button
-                variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                size="sm"
+                variant={viewMode === 'grid' ? 'primary' : 'ghost'}
+                size="small"
               onClick={() => setViewMode('grid')}
               className="rounded-r-none"
             >
               <Grid3X3 className="w-4 h-4" />
             </Button>
             <Button
-              variant={viewMode === 'list' ? 'default' : 'ghost'}
-              size="sm"
+              variant={viewMode === 'list' ? 'primary' : 'ghost'}
+              size="small"
               onClick={() => setViewMode('list')}
               className="rounded-l-none"
             >
@@ -312,10 +312,10 @@ const CharacterList: React.FC = () => {
               {selectedIds.length} {selectedIds.length === 1 ? 'character' : 'characters'} selected
             </span>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={clearSelection}>
+              <Button variant="ghost" size="small" onClick={clearSelection}>
                 Clear Selection
               </Button>
-              <Button variant="destructive" size="sm" onClick={handleBulkDelete}>
+              <Button variant="danger" size="small" onClick={handleBulkDelete}>
                 Delete Selected
               </Button>
             </div>

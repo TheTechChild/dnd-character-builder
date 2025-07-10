@@ -276,7 +276,7 @@ export function ImportExportDialog({
                     <Label>Select Characters</Label>
                     <Button
                       variant="ghost"
-                      size="sm"
+                      size="small"
                       onClick={toggleSelectAll}
                     >
                       {selectedCharacterIds.size === characters.length ? 'Deselect All' : 'Select All'}
@@ -314,7 +314,7 @@ export function ImportExportDialog({
                   <Button
                     onClick={handleExportPDF}
                     disabled={selectedCharacterIds.size !== 1}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1"
                   >
                     <FileText className="mr-2 h-4 w-4" />

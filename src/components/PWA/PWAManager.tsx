@@ -109,7 +109,7 @@ export function PWAManager() {
                 Install
               </Button>
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={() => setShowInstallPrompt(false)}
                 className="flex-1"
               >
@@ -134,15 +134,15 @@ export function PWAManager() {
               <div className="flex gap-2 ml-4">
                 {needRefresh && (
                   <Button
-                    size="sm"
-                    variant="outline"
+                    size="small"
+                    variant="ghost"
                     onClick={() => updateServiceWorker(true)}
                   >
                     Reload
                   </Button>
                 )}
                 <Button
-                  size="sm"
+                  size="small"
                   variant="ghost"
                   onClick={close}
                 >
@@ -162,7 +162,7 @@ export function PWAManager() {
             <AlertDescription className="flex items-center justify-between">
               <span>You're offline. Changes will sync when reconnected.</span>
               <Button
-                size="sm"
+                size="small"
                 variant="ghost"
                 onClick={() => setShowOfflineAlert(false)}
                 className="ml-4"

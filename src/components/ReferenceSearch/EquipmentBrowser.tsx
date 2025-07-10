@@ -52,13 +52,13 @@ function EquipmentCard({ item, onBookmark, isBookmarked }: EquipmentCardProps) {
               <CardTitle className="text-lg">{item.name}</CardTitle>
             </div>
             <div className="flex items-center gap-2 mt-2">
-              <Badge variant="outline">{item.category}</Badge>
+              <Badge variant="secondary">{item.category}</Badge>
               {item.cost && <Badge variant="secondary">{item.cost}</Badge>}
             </div>
           </div>
           <Button
             variant="ghost"
-            size="sm"
+            size="small"
             onClick={() => onBookmark(item)}
           >
             {isBookmarked ? (
@@ -124,7 +124,7 @@ function MagicItemCard({ item, onBookmark, isBookmarked }: MagicItemCardProps) {
               <Badge className={`${rarityColors[item.rarity] || 'bg-gray-500'} text-white`}>
                 {item.rarity}
               </Badge>
-              <Badge variant="outline">{item.type}</Badge>
+              <Badge variant="secondary">{item.type}</Badge>
               {item.requires_attunement === 'requires attunement' && (
                 <Badge variant="secondary">Attunement</Badge>
               )}
@@ -132,7 +132,7 @@ function MagicItemCard({ item, onBookmark, isBookmarked }: MagicItemCardProps) {
           </div>
           <Button
             variant="ghost"
-            size="sm"
+            size="small"
             onClick={() => onBookmark(item)}
           >
             {isBookmarked ? (

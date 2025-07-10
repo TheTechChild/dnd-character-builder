@@ -68,14 +68,14 @@ function SpellCard({ spell, onBookmark, isBookmarked }: SpellCardProps) {
               <Badge className={`${schoolColors[spell.school] || 'bg-gray-500'} text-white`}>
                 {spell.school}
               </Badge>
-              <Badge variant="outline">{levelText}</Badge>
+              <Badge variant="secondary">{levelText}</Badge>
               {spell.ritual === 'yes' && <Badge variant="secondary">Ritual</Badge>}
               {spell.concentration === 'yes' && <Badge variant="secondary">Concentration</Badge>}
             </div>
           </div>
           <Button
             variant="ghost"
-            size="sm"
+            size="small"
             onClick={() => onBookmark(spell)}
           >
             {isBookmarked ? (

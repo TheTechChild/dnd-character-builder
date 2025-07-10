@@ -29,7 +29,7 @@ function MobileNavigation({ className }: MobileNavigationProps) {
       {/* Mobile menu button */}
       <Button
         variant="ghost"
-        size="icon"
+        size="small"
         onClick={toggleMenu}
         className="touch-target text-white hover:bg-indigo-700"
         aria-label="Toggle navigation menu"
@@ -59,7 +59,7 @@ function MobileNavigation({ className }: MobileNavigationProps) {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Menu</h2>
             <Button
               variant="ghost"
-              size="icon"
+              size="small"
               onClick={closeMenu}
               className="touch-target"
               aria-label="Close menu"
@@ -99,7 +99,7 @@ function MobileNavigation({ className }: MobileNavigationProps) {
           {/* Bottom actions */}
           <div className="p-4 border-t border-gray-200 dark:border-gray-700">
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() => {
                 setShowFloatingWidget(!showFloatingWidget)
                 closeMenu()

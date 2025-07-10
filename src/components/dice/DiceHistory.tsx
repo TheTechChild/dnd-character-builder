@@ -38,7 +38,7 @@ export function DiceHistory({ className, maxItems = 50 }: DiceHistoryProps) {
         <CardTitle>Roll History</CardTitle>
         <Button
           variant="ghost"
-          size="sm"
+          size="small"
           onClick={clearHistory}
         >
           Clear History
@@ -63,7 +63,7 @@ export function DiceHistory({ className, maxItems = 50 }: DiceHistoryProps) {
               >
                 <Button
                   variant="ghost"
-                  size="sm"
+                  size="small"
                   className="absolute top-1 right-1 h-6 w-6 p-0"
                   onClick={() => removeFromHistory(roll.id)}
                 >

@@ -65,14 +65,14 @@ function BookmarkItem({ bookmark, onRemove, onOpen }: BookmarkItemProps) {
           <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
             <Button
               variant="ghost"
-              size="sm"
+              size="small"
               onClick={() => onOpen(bookmark.category, bookmark.slug)}
             >
               <ExternalLink className="h-4 w-4" />
             </Button>
             <Button
               variant="ghost"
-              size="sm"
+              size="small"
               onClick={() => onRemove(bookmark.id)}
               className="text-red-500 hover:text-red-700"
             >
@@ -156,8 +156,8 @@ export function BookmarkManager() {
 
         <div className="flex gap-2">
           <Button
-            variant={selectedCategory === 'all' ? 'default' : 'outline'}
-            size="sm"
+            variant={selectedCategory === 'all' ? 'primary' : 'ghost'}
+            size="small"
             onClick={() => setSelectedCategory('all')}
           >
             All
@@ -165,8 +165,8 @@ export function BookmarkManager() {
           {Object.entries(categoryLabels).map(([key, label]) => (
             <Button
               key={key}
-              variant={selectedCategory === key ? 'default' : 'outline'}
-              size="sm"
+              variant={selectedCategory === key ? 'primary' : 'ghost'}
+              size="small"
               onClick={() => setSelectedCategory(key as Open5eEndpoint)}
               className="hidden sm:inline-flex"
             >
