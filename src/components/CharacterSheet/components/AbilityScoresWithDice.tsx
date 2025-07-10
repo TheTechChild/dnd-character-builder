@@ -31,6 +31,54 @@ const ABILITY_FULL_NAMES = {
   charisma: 'Charisma'
 } as const;
 
+// Hexagonal frame component
+const HexagonFrame = ({ 
+  children, 
+  isActive = false,
+  className 
+}: { 
+  children: React.ReactNode;
+  isActive?: boolean;
+  className?: string;
+}) => {
+  return (
+    <div className={cn("relative", className)}>
+      <svg
+        viewBox="0 0 100 100"
+        className="absolute inset-0 w-full h-full"
+        style={{ transform: 'scale(1.1)' }}
+      >
+        <defs>
+          <linearGradient id={`hexGradient-${isActive ? 'active' : 'inactive'}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={isActive ? "#D97706" : "#92400E"} />
+            <stop offset="100%" stopColor={isActive ? "#F59E0B" : "#D97706"} />
+          </linearGradient>
+        </defs>
+        <polygon
+          points="50,5 85,25 85,75 50,95 15,75 15,25"
+          fill="none"
+          stroke={`url(#hexGradient-${isActive ? 'active' : 'inactive'})`}
+          strokeWidth="2"
+          className={cn(
+            "transition-all duration-300",
+            isActive && "filter drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]"
+          )}
+        />
+        {/* Inner decorative corners */}
+        <path
+          d="M 20,28 L 25,30 M 75,30 L 80,28 M 80,72 L 75,70 M 25,70 L 20,72"
+          stroke={isActive ? "#F59E0B" : "#D97706"}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+      <div className="relative z-10 flex items-center justify-center h-full">
+        {children}
+      </div>
+    </div>
+  );
+};
+
 export function AbilityScoresWithDice({ character, isEditMode = false }: AbilityScoresWithDiceProps) {
   const { updateField } = useEditField();
   const roll = useDiceStore((state) => state.roll);
@@ -50,12 +98,15 @@ export function AbilityScoresWithDice({ character, isEditMode = false }: Ability
   
   return (
     <div className={cn(
-      "bg-white dark:bg-slate-900 rounded-lg p-4 border border-slate-200 dark:border-slate-700",
-      "print:border-black"
+      "bg-gradient-to-br from-amber-50/50 to-amber-100/30 rounded-lg p-6",
+      "border-2 border-amber-700/30 shadow-inner",
+      "print:border-black print:bg-white"
     )}>
-      <h2 className="text-lg font-bold mb-4">ABILITY SCORES</h2>
+      <h2 className="text-xl font-heading font-bold mb-6 text-amber-900 text-center tracking-wider">
+        ABILITY SCORES
+      </h2>
       
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-6">
         {Object.entries(character.abilities).map(([key, score]) => {
           const abilityKey = key as keyof typeof character.abilities;
           const modifier = getAbilityModifier(score);
@@ -64,68 +115,70 @@ export function AbilityScoresWithDice({ character, isEditMode = false }: Ability
           return (
             <div 
               key={key} 
-              className={cn(
-                "text-center space-y-1",
-                "border border-slate-200 dark:border-slate-700 rounded p-2",
-                "print:border-black",
-                "relative group"
-              )}
+              className="relative group"
             >
+              {/* Dice roll button */}
               <Button
                 variant="ghost"
                 size="small"
                 className={cn(
-                  "absolute -top-2 -right-2 h-6 w-6 p-0",
+                  "absolute -top-3 -right-3 h-8 w-8 p-0 z-20",
+                  "bg-amber-200/80 hover:bg-amber-300",
+                  "border border-amber-700/50",
                   "opacity-0 group-hover:opacity-100 transition-opacity",
+                  "rounded-full",
                   "print:hidden"
                 )}
                 onClick={() => handleAbilityRoll(abilityKey)}
                 title={`Roll ${ABILITY_FULL_NAMES[abilityKey]} check`}
               >
-                <Dices className="h-4 w-4" />
+                <Dices className="h-4 w-4 text-amber-900" />
               </Button>
               
-              <div className="text-xs font-medium text-slate-600 dark:text-slate-400">
-                {ABILITY_NAMES[abilityKey]}
-              </div>
-              <div className="text-2xl font-bold">
-                <EditableField
-                  value={score}
-                  onSave={(value) => {
-                    updateField('abilities', {
-                      ...character.abilities,
-                      [abilityKey]: value
-                    });
-                  }}
-                  type="number"
-                  min={1}
-                  max={30}
-                  isEditMode={isEditMode}
-                  className="text-center"
-                  editClassName="text-center"
-                />
-              </div>
-              <div 
-                className="text-sm font-medium cursor-pointer hover:text-blue-600"
-                onClick={() => !isEditMode && handleAbilityRoll(abilityKey)}
-                title={`Click to roll ${ABILITY_FULL_NAMES[abilityKey]} check`}
+              <HexagonFrame 
+                isActive={!isEditMode}
+                className="w-24 h-24 mx-auto"
               >
-                ({modifierStr})
-              </div>
+                <div className="text-center">
+                  <div className="text-xs font-bold text-amber-700 mb-1">
+                    {ABILITY_NAMES[abilityKey]}
+                  </div>
+                  <div className="text-2xl font-bold text-amber-900">
+                    <EditableField
+                      value={score}
+                      onSave={(value) => {
+                        updateField('abilities', {
+                          ...character.abilities,
+                          [abilityKey]: value
+                        });
+                      }}
+                      type="number"
+                      min={1}
+                      max={30}
+                      isEditMode={isEditMode}
+                      className="text-center bg-transparent"
+                      editClassName="text-center bg-amber-50 rounded"
+                    />
+                  </div>
+                  <div 
+                    className={cn(
+                      "text-lg font-bold cursor-pointer transition-colors",
+                      "text-amber-800 hover:text-amber-600",
+                      modifier >= 0 ? "text-green-700" : "text-red-700"
+                    )}
+                    onClick={() => !isEditMode && handleAbilityRoll(abilityKey)}
+                    title={`Click to roll ${ABILITY_FULL_NAMES[abilityKey]} check`}
+                  >
+                    {modifierStr}
+                  </div>
+                </div>
+              </HexagonFrame>
               
-              <div className="flex justify-center gap-1 mt-1">
-                <div className={cn(
-                  "w-3 h-3 border border-slate-300 dark:border-slate-600 rounded-sm",
-                  "print:border-black"
-                )} />
-                <div className={cn(
-                  "w-3 h-3 border border-slate-300 dark:border-slate-600 rounded-sm",
-                  "print:border-black"
-                )} />
-                <div className={cn(
-                  "w-3 h-3 border border-slate-300 dark:border-slate-600 rounded-sm",
-                  "print:border-black"
-                )} />
+              {/* Decorative dots */}
+              <div className="flex justify-center gap-1 mt-2">
+                <div className="w-2 h-2 bg-amber-700/30 rounded-full" />
+                <div className="w-2 h-2 bg-amber-700/50 rounded-full" />
+                <div className="w-2 h-2 bg-amber-700/30 rounded-full" />
               </div>
             </div>
           );

@@ -37,7 +37,7 @@ export function CoreStatsPage({ character, isEditMode = false }: CoreStatsPagePr
       </div>
       
       <div className="border-t pt-4 print:pt-2">
-        <CombatStats character={character} />
+        <CombatStats character={character} isEditMode={isEditMode} />
         
         <div className={cn(
           "grid gap-4 mt-4",
