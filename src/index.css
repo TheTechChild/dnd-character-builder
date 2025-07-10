@@ -1169,6 +1169,32 @@
   to { opacity: 0; }
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes unfurl {
+  0% {
+    transform: scaleY(0) translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-unfurl {
+  animation: unfurl 0.3s ease-out;
+  transform-origin: top;
+}
+
 /* Button Ripple Effect */
 @keyframes ripple {
   0% {
