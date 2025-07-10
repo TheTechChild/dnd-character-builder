@@ -32,7 +32,7 @@ A modern, responsive web application for creating and managing Dungeons & Dragon
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 18+ and yarn
 - Git
 
 ### Installation
@@ -45,25 +45,25 @@ cd dnd-character-builder
 
 2. Install dependencies:
 ```bash
-npm install
+yarn install
 ```
 
 3. Start the development server:
 ```bash
-npm run dev
+yarn dev
 ```
 
 4. Open your browser and navigate to `http://localhost:5173`
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm test` - Run tests
-- `npm run lint` - Run ESLint
-- `npm run type-check` - Run TypeScript type checking
-- `npm run precommit` - Run all checks (lint, type-check, tests)
+- `yarn dev` - Start development server
+- `yarn build` - Build for production
+- `yarn preview` - Preview production build
+- `yarn test` - Run tests
+- `yarn lint` - Run ESLint
+- `yarn type-check` - Run TypeScript type checking
+- `yarn precommit` - Run all checks (lint, type-check, tests)
 
 ## Project Structure
 
@@ -100,7 +100,7 @@ The project features a comprehensive dark fantasy design system including:
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature-name`
 3. Make your changes
-4. Run precommit checks: `npm run precommit`
+4. Run precommit checks: `yarn precommit`
 5. Commit your changes: `git commit -m "feat: add your feature"`
 6. Push to your fork: `git push origin feature/your-feature-name`
 7. Create a Pull Request
@@ -121,7 +121,7 @@ This project follows conventional commits:
 1. Pick an issue from the project board
 2. Create a feature branch from main
 3. Implement your changes
-4. Run `npm run precommit` to ensure code quality
+4. Run `yarn precommit` to ensure code quality
 5. Create a pull request referencing the issue
 
 ## Features Roadmap
