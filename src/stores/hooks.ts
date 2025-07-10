@@ -179,9 +179,9 @@ export const useQuickActions = () => {
   const createCharacter = (character: Character) => {
     addCharacter(character);
     addToast({
-      type: 'success',
+      variant: 'success',
       title: 'Character Created',
-      message: `${character.name} has been created successfully.`
+      description: `${character.name} has been created successfully.`
     });
   };
   
@@ -194,9 +194,9 @@ export const useQuickActions = () => {
     if (character) {
       deleteCharacter(id);
       addToast({
-        type: 'success',
+        variant: 'success',
         title: 'Character Deleted',
-        message: `${character.name} has been deleted.`
+        description: `${character.name} has been deleted.`
       });
       closeModal('deleteConfirm');
     }
@@ -205,9 +205,9 @@ export const useQuickActions = () => {
   const saveCharacter = (id: string, updates: Partial<Character>) => {
     updateCharacter(id, updates);
     addToast({
-      type: 'success',
+      variant: 'success',
       title: 'Character Saved',
-      message: 'Changes have been saved successfully.'
+      description: 'Changes have been saved successfully.'
     });
   };
   

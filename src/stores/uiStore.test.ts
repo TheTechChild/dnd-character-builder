@@ -185,9 +185,9 @@ describe('uiStore', () => {
 
       act(() => {
         result.current.addToast({
-          type: 'success',
+          variant: 'success',
           title: 'Test Toast',
-          message: 'This is a test'
+          description: 'This is a test'
         });
       });
 
@@ -207,9 +207,9 @@ describe('uiStore', () => {
       const { result } = renderHook(() => useUIStore());
 
       act(() => {
-        result.current.addToast({ type: 'success', title: 'Toast 1' });
-        result.current.addToast({ type: 'error', title: 'Toast 2' });
-        result.current.addToast({ type: 'info', title: 'Toast 3' });
+        result.current.addToast({ variant: 'success', title: 'Toast 1' });
+        result.current.addToast({ variant: 'error', title: 'Toast 2' });
+        result.current.addToast({ variant: 'info', title: 'Toast 3' });
         result.current.clearToasts();
       });
 
@@ -222,7 +222,7 @@ describe('uiStore', () => {
 
       act(() => {
         result.current.addToast({
-          type: 'success',
+          variant: 'success',
           title: 'Auto Remove',
           duration: 1000
         });

@@ -8,11 +8,11 @@ export const useToast = () => {
     description?: string;
     variant?: 'default' | 'destructive';
   }) => {
-    const type = variant === 'destructive' ? 'error' : 'info';
+    const toastVariant = variant === 'destructive' ? 'error' : 'default';
     addToast({
-      type,
       title,
-      message: description
+      description,
+      variant: toastVariant
     });
   };
 
